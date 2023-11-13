@@ -66,6 +66,7 @@ public class store
 				break;
 			}
 			if (userinput == 1)	{
+				addItem();
 				System.out.print("\n New Item Added");	
 				break;
 			}
@@ -89,5 +90,39 @@ public class store
 		}
 		
 	System.out.println("\n\n Thanks for using this program...!");
+	}
+
+	/*
+	This method asks the user to supply an item name, unit price and quantity
+	It then auto generates an item id and calculates the total price of the stock
+	This information is all concatenated into a string that is appended to the items.txt doc
+	 */
+	static void addItem(){
+		String item_name = takeUserInputString("NAME OF ITEM: ");
+		int unit_price = takeUserInputInteger("UNIT PRICE: ");
+		int quantity = takeUserInputInteger("QUANTITY: ");
+		System.out.println(item_name + unit_price + quantity);
+	}
+
+	/*
+	This method takes a string as input, this string is provided to the user
+	the function then takes the user's response as a string and returns it
+	 */
+	static String takeUserInputString(String question){
+		Scanner input = new Scanner(System.in);
+		System.out.print(question);
+		return input.nextLine();
+
+	}
+
+	/*
+	This method takes a string as input, this string is provided to the user
+	the function then takes the user's response as an integer and returns it
+	 */
+	static Integer takeUserInputInteger(String question){
+		Scanner input = new Scanner(System.in);
+		System.out.print(question);
+		return input.nextInt();
+
 	}
 }
