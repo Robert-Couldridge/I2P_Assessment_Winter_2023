@@ -149,11 +149,20 @@ public class store
 	static void generateItemID(String items_file){
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(items_file))){
 			String line;
+			int item_id = 0;
 
-			// Iterate through the .txt file line by line
+			// Iterate through the .txt file line by line finding the largest item ID and adding 1
 			while ((line = bufferedReader.readLine()) != null){
-				System.out.println(line);
+				String[] current_item_id = line.split(",");
+				try{
+					int current_item_id_number = Integer.parseInt(current_item_id[0]);
+					if (current_item_id_number > item_id){
+						item_id = current_item_id_number + 1;
+					}
+				}catch (NumberFormatException e){;}
+
 			}
+			System.out.print(item_id);
 		}
 		catch (IOException e){
 			System.out.println("Error: " + e.getMessage());
