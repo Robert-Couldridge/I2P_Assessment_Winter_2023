@@ -41,6 +41,7 @@ public class store
 {
 	public static void main(String args[])
 	{
+		String items_file = "items.txt";
 
 		Scanner input = new Scanner(System.in);
 		
@@ -66,7 +67,7 @@ public class store
 				break;
 			}
 			if (userinput == 1)	{
-				addItem();
+				addItem(items_file);
 				System.out.print("\n New Item Added");	
 				break;
 			}
@@ -97,11 +98,32 @@ public class store
 	It then auto generates an item id and calculates the total price of the stock
 	This information is all concatenated into a string that is appended to the items.txt doc
 	 */
-	static void addItem(){
+	static void addItem(String items_file){
+
+		// gather data from the user
 		String item_name = takeUserInputString("NAME OF ITEM: ");
 		int unit_price = takeUserInputInteger("UNIT PRICE: ");
 		int quantity = takeUserInputInteger("QUANTITY: ");
-		System.out.println(item_name + unit_price + quantity);
+
+		// create 'total_price' and 'item_id' values
+		int total_price = quantity * unit_price;
+		int item_id = 103;
+		generateItemID(items_file);
+
+		// append data to items.txt
+		try{
+			FileWriter out = new FileWriter(items_file, true);
+			PrintWriter output = new PrintWriter(out);
+			output.printf("%d,%s,%d,%d,%d%n", item_id, item_name, unit_price, quantity, total_price);
+			output.close();
+		}
+		catch (FileNotFoundException e){
+			System.out.printf("%s NOT FOUND", items_file);
+		}
+		catch (IOException e){
+			System.out.println("Error: " + e.getMessage());
+		}
+
 	}
 
 	/*
@@ -112,7 +134,6 @@ public class store
 		Scanner input = new Scanner(System.in);
 		System.out.print(question);
 		return input.nextLine();
-
 	}
 
 	/*
@@ -123,6 +144,19 @@ public class store
 		Scanner input = new Scanner(System.in);
 		System.out.print(question);
 		return input.nextInt();
+	}
 
+	static void generateItemID(String items_file){
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(items_file))){
+			String line;
+
+			// Iterate through the .txt file line by line
+			while ((line = bufferedReader.readLine()) != null){
+				System.out.println(line);
+			}
+		}
+		catch (IOException e){
+			System.out.println("Error: " + e.getMessage());
+		}
 	}
 }
