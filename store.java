@@ -49,16 +49,17 @@ public class store
 		System.out.println("1. ADD NEW ITEM");
 		System.out.println("2. UPDATE QUANTITY OF EXISTING ITEM");
 		System.out.println("3. REMOVE ITEM");
-		System.out.println("4. VIEW DAILY TRANSACTION REPORT");
+		System.out.println("4. SEARCH FOR AN ITEM");
+		System.out.println("5. VIEW DAILY TRANSACTION REPORT");
 		System.out.println("---------------------------------");
-		System.out.println("5. Exit");
+		System.out.println("6. Exit");
 		
 		
 		System.out.print("\n Enter a choice and Press ENTER to continue[1-5]:");
 		int userinput = input.nextInt();
 			
 
-		while(userinput !=5)
+		while(userinput !=6)
 		{
 			if (userinput>5 || userinput<1) {
 				System.out.println("This doesn't appear to be a valid option...!");
@@ -77,9 +78,13 @@ public class store
 				break;
 			}	
 			else if (userinput == 4) {
-				System.out.print("\n Report printed");	
+				System.out.print("\n Item Searched");
 				break;
-			}	
+			}
+			else if (userinput == 5){
+				System.out.print("\n Report printed");
+				break;
+			}
 			
 		}
 		
