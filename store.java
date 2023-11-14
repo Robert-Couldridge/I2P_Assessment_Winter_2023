@@ -142,7 +142,8 @@ public class store
 		}
 
 		// locates the item's records in the item file
-		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(items_file))){
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(items_file));
+			 BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(items_file))) {
 			String line;
 			while ((line = bufferedReader.readLine()) != null){
 				String[] current_item = line.split(",");
