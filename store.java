@@ -35,6 +35,7 @@
 
 
 import java.io.*;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class store
@@ -71,7 +72,8 @@ public class store
 				System.out.print("\n New Item Added");	
 				break;
 			}
-			else if (userinput == 2) {		
+			else if (userinput == 2) {
+				updateQuantity(items_file);
 				System.out.print("\n Item quantity updated");
 				break;
 			}
@@ -122,6 +124,47 @@ public class store
 		catch (IOException e){
 			System.out.println("Error: " + e.getMessage());
 		}
+
+		// display item added to user
+		System.out.printf("%d %s's added at £%d each", quantity, item_name, unit_price);
+
+	}
+
+	static void updateQuantity(String items_file){
+		String item_name = "";
+
+		// check whether the desired item exists in the items file
+		while (!isItemInInventory(item_name, items_file)){
+			item_name = takeUserInputString("NAME OF ITEM: ");
+			if (!isItemInInventory(item_name, items_file)){
+				System.out.printf("%s not found in inventory\n", item_name);
+			}
+		}
+
+		// locates the item's records in the item file
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(items_file))){
+			String line;
+			while ((line = bufferedReader.readLine()) != null){
+				String[] current_item = line.split(",");
+				if (Objects.equals(current_item[1], item_name)) {
+
+					// asks the user for the desired new quantity of the item
+					int quantity = takeUserInputInteger("UPDATED QUANTITY OF ITEM: ");
+					int unit_price = Integer.parseInt(current_item[3]);
+					int total_price = unit_price * quantity;
+
+					// updates the records for the desired new quantity of item
+					current_item[4] = String.valueOf(total_price);
+					current_item[2] = String.valueOf(quantity);
+				}
+			}
+		}
+		catch (IOException e){
+			System.out.println("Error: " + e.getMessage());
+		}
+
+
+
 
 	}
 
@@ -176,4 +219,32 @@ public class store
 		item_id_string = String.format("%05d", item_id_int);
 		return item_id_string;
 	}
+
+	/*
+	This method iterates through the "items.txt" file and checks if the
+	provided item name is located in the file, it returns TRUE if found
+	 */
+	static boolean isItemInInventory(String item_name, String items_file){
+		boolean in_file = false;
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(items_file))){
+			String line;
+
+			// Iterate through the .txt file line by line checking for the desired item
+			while ((line = bufferedReader.readLine()) != null){
+				String[] current_item_name = line.split(",");
+				if (Objects.equals(current_item_name[1], item_name)) {
+					in_file = true;
+				}
+			}
+		}
+		catch (IOException e){
+			System.out.println("Error: " + e.getMessage());
+		}
+
+		// Return the results of the search in boolean form
+		return in_file;
+	}
+
+
+
 }
