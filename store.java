@@ -107,14 +107,13 @@ public class store
 
 		// create 'total_price' and 'item_id' values
 		int total_price = quantity * unit_price;
-		int item_id = 103;
-		generateItemID(items_file);
+		String item_id = generateItemID(items_file);
 
 		// append data to items.txt
 		try{
 			FileWriter out = new FileWriter(items_file, true);
 			PrintWriter output = new PrintWriter(out);
-			output.printf("%d,%s,%d,%d,%d%n", item_id, item_name, unit_price, quantity, total_price);
+			output.printf("%s,%s,%d,%d,%d%n", item_id, item_name, unit_price, quantity, total_price);
 			output.close();
 		}
 		catch (FileNotFoundException e){
@@ -146,26 +145,35 @@ public class store
 		return input.nextInt();
 	}
 
-	static void generateItemID(String items_file){
+	/*
+	This method iterates through the "items.txt" file and finds the biggest item ID
+	It then adds 1 to that number before adding any leading 0s to create a 5-digit number
+	This is then converted to a string and returned
+	 */
+	static String generateItemID(String items_file){
+		String item_id_string = "";
+		int item_id_int = 0;
+
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(items_file))){
 			String line;
-			int item_id = 0;
 
 			// Iterate through the .txt file line by line finding the largest item ID and adding 1
 			while ((line = bufferedReader.readLine()) != null){
 				String[] current_item_id = line.split(",");
 				try{
 					int current_item_id_number = Integer.parseInt(current_item_id[0]);
-					if (current_item_id_number > item_id){
-						item_id = current_item_id_number + 1;
+					if (current_item_id_number >= item_id_int){
+						item_id_int = current_item_id_number + 1;
 					}
 				}catch (NumberFormatException e){;}
-
 			}
-			System.out.print(item_id);
 		}
 		catch (IOException e){
 			System.out.println("Error: " + e.getMessage());
 		}
+
+		// Return item ID as a 5-digit number in string form
+		item_id_string = String.format("%05d", item_id_int);
+		return item_id_string;
 	}
 }
