@@ -19,7 +19,7 @@ public class storeActions {
         String itemName = "";
         do {
             itemName = takeUserInput.takeUserInputString("NAME OF ITEM: ");
-            if (isItemInInventory(itemName, itemsFile, false)){
+            if (isItemInInventory(itemName, itemsFile, true)){
                 System.out.printf("%s already in inventory\n", itemName);
             }
         } while (isItemInInventory(itemName, itemsFile,false));
@@ -36,7 +36,7 @@ public class storeActions {
         try{
             FileWriter out = new FileWriter(itemsFile, true);
             PrintWriter output = new PrintWriter(out);
-            output.printf("%s,%s,%.1f,%d,%.1f%n", itemId, itemName, unitPrice, quantity, totalPrice);
+            output.printf("%n%s,%s,%.1f,%d,%.1f", itemId, itemName, unitPrice, quantity, totalPrice);
             output.close();
         }
         catch (FileNotFoundException e){
@@ -97,7 +97,7 @@ public class storeActions {
             if (!isItemInInventory(itemName, itemsFile,false)){
                 System.out.printf("%s not found in inventory\n", itemName);
             }
-        } while (!isItemInInventory(itemName, itemsFile,false));
+        } while (!isItemInInventory(itemName, itemsFile,true));
         System.out.printf("%s located in inventory\n", itemName);
 
         // create a temporary file to write the updated inventory to
