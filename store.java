@@ -43,6 +43,7 @@ public class store
 	public static void main(String args[])
 	{
 		String items_file = "items.txt";
+		storeActions storeInstance = new storeActions();
 
 		Scanner input = new Scanner(System.in);
 		
@@ -59,7 +60,6 @@ public class store
 		
 		System.out.print("\n Enter a choice and Press ENTER to continue[1-5]:");
 		int userinput = input.nextInt();
-		storeActions store = new storeActions();
 
 		while(userinput !=6)
 		{
@@ -68,12 +68,11 @@ public class store
 				break;
 			}
 			if (userinput == 1)	{
-				store.addItem(items_file);
-				System.out.print("\n New Item Added");	
+				storeInstance.addItem(items_file);
 				break;
 			}
 			else if (userinput == 2) {
-				store.updateQuantity(items_file);
+				storeInstance.updateQuantity(items_file);
 				System.out.print("\n Item quantity updated");
 				break;
 			}

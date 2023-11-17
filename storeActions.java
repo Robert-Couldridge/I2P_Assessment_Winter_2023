@@ -7,35 +7,35 @@ public class storeActions {
     /*
 	This method asks the user to supply an item name, unit price and quantity
 	It then auto generates an item id and calculates the total price of the stock
-	This information is all concatenated into a string that is appended to the items.txt doc
+	This information is all concatenated into a string that is appended to the itemsFile doc
 	 */
-    public void addItem(String items_file){
+    public void addItem(String itemsFile){
 
         // gather data from the user
-        String item_name = takeUserInputString("NAME OF ITEM: ");
-        int unit_price = takeUserInputInteger("UNIT PRICE: ");
+        String itemName = takeUserInputString("NAME OF ITEM: ");
+        int unitPrice = takeUserInputInteger("UNIT PRICE: ");
         int quantity = takeUserInputInteger("QUANTITY: ");
 
-        // create 'total_price' and 'item_id' values
-        int total_price = quantity * unit_price;
-        String item_id = generateItemID(items_file);
+        // create 'totalPrice' and 'itemId' values
+        int totalPrice = quantity * unitPrice;
+        String itemId = generateItemID(itemsFile);
 
-        // append data to items.txt
+        // append data to itemsFile
         try{
-            FileWriter out = new FileWriter(items_file, true);
+            FileWriter out = new FileWriter(itemsFile, true);
             PrintWriter output = new PrintWriter(out);
-            output.printf("%s,%s,%d,%d,%d%n", item_id, item_name, unit_price, quantity, total_price);
+            output.printf("%s,%s,%d,%d,%d%n", itemId, itemName, unitPrice, quantity, totalPrice);
             output.close();
         }
         catch (FileNotFoundException e){
-            System.out.printf("%s NOT FOUND", items_file);
+            System.out.printf("%s NOT FOUND", itemsFile);
         }
         catch (IOException e){
             System.out.println("Error: " + e.getMessage());
         }
 
         // display item added to user
-        System.out.printf("%d %s's added at £%d each", quantity, item_name, unit_price);
+        System.out.printf("%d %s's added at £%d each", quantity, itemName, unitPrice);
 
     }
 
@@ -64,20 +64,20 @@ public class storeActions {
 	It then adds 1 to that number before adding any leading 0s to create a 5-digit number
 	This is then converted to a string and returned
 	 */
-    public String generateItemID(String items_file){
-        String item_id_string = "";
-        int item_id_int = 0;
+    public String generateItemID(String itemsFile){
+        String itemIdString = "";
+        int itemIdInt = 0;
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(items_file))){
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(itemsFile))){
             String line;
 
-            // Iterate through the .txt file line by line finding the largest item ID and adding 1
+            // Iterate through the itemsFile file line by line finding the largest item ID and adding 1
             while ((line = bufferedReader.readLine()) != null){
-                String[] current_item_id = line.split(",");
+                String[] currentItemId = line.split(",");
                 try{
-                    int current_item_id_number = Integer.parseInt(current_item_id[0]);
-                    if (current_item_id_number >= item_id_int){
-                        item_id_int = current_item_id_number + 1;
+                    int currentItemIdNumber = Integer.parseInt(currentItemId[0]);
+                    if (currentItemIdNumber >= itemIdInt){
+                        itemIdInt = currentItemIdNumber + 1;
                     }
                 }catch (NumberFormatException e){;}
             }
@@ -87,38 +87,41 @@ public class storeActions {
         }
 
         // Return item ID as a 5-digit number in string form
-        item_id_string = String.format("%05d", item_id_int);
-        return item_id_string;
+        itemIdString = String.format("%05d", itemIdInt);
+        return itemIdString;
     }
 
-    public void updateQuantity(String items_file){
-        String item_name = "";
+    /*
+	This method
+	 */
+    public void updateQuantity(String itemsFile){
+        String itemName = "";
 
         // check whether the desired item exists in the items file
-        while (!isItemInInventory(item_name, items_file)){
-            item_name = takeUserInputString("NAME OF ITEM: ");
-            if (!isItemInInventory(item_name, items_file)){
-                System.out.printf("%s not found in inventory\n", item_name);
+        while (!isItemInInventory(itemName, itemsFile)){
+            itemName = takeUserInputString("NAME OF ITEM: ");
+            if (!isItemInInventory(itemName, itemsFile)){
+                System.out.printf("%s not found in inventory\n", itemName);
             }
         }
-        System.out.printf("%s located in inventory\n", item_name);
+        System.out.printf("%s located in inventory\n", itemName);
 
         // locates the item's records in the item file
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(items_file))){
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(itemsFile))){
             String line;
             while ((line = bufferedReader.readLine()) != null){
-                String[] current_item = line.split(",");
-                if (Objects.equals(current_item[1], item_name)) {
+                String[] currentItem = line.split(",");
+                if (Objects.equals(currentItem[1], itemName)) {
 
                     // asks the user for the desired new quantity of the item
                     int quantity = takeUserInputInteger("UPDATED QUANTITY OF ITEM: ");
-                    int unit_price = Integer.parseInt(current_item[2]);
-                    int total_price = unit_price * quantity;
+                    int unitPrice = Integer.parseInt(currentItem[2]);
+                    int totalPrice = unitPrice * quantity;
 
                     // updates the records for the desired new quantity of item
-                    current_item[4] = String.valueOf(total_price);
-                    current_item[3] = String.valueOf(quantity);
-                    System.out.print(String.join(",", current_item));
+                    currentItem[4] = String.valueOf(totalPrice);
+                    currentItem[3] = String.valueOf(quantity);
+                    System.out.print(String.join(",", currentItem));
                 }
             }
         }
@@ -135,16 +138,16 @@ public class storeActions {
 	This method iterates through the items file and checks if the
 	provided item name is located in the file, it returns TRUE if found
 	 */
-    public boolean isItemInInventory(String item_name, String items_file){
-        boolean in_file = false;
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(items_file))){
+    public boolean isItemInInventory(String itemName, String itemsFile){
+        boolean inFile = false;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(itemsFile))){
             String line;
 
-            // Iterate through the .txt file line by line checking for the desired item
+            // Iterate through the itemsFile file line by line checking for the desired item
             while ((line = bufferedReader.readLine()) != null){
-                String[] current_item_name = line.split(",");
-                if (Objects.equals(current_item_name[1], item_name)) {
-                    in_file = true;
+                String[] currentItemName = line.split(",");
+                if (Objects.equals(currentItemName[1], itemName)) {
+                    inFile = true;
                 }
             }
         }
@@ -153,7 +156,7 @@ public class storeActions {
         }
 
         // Return the results of the search in boolean form
-        return in_file;
+        return inFile;
     }
 
 
