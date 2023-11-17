@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class storeActions {
 
+        userInput takeUserInput = new userInput();
     /*
 	This method asks the user to supply an item name, unit price and quantity
 	It then auto generates an item id and calculates the total price of the stock
@@ -14,15 +15,15 @@ public class storeActions {
         // check whether the desired item exists in the items file
         String itemName = "";
         do {
-            itemName = takeUserInputString("NAME OF ITEM: ");
+            itemName = takeUserInput.takeUserInputString("NAME OF ITEM: ");
             if (isItemInInventory(itemName, itemsFile)){
                 System.out.printf("%s already in inventory\n", itemName);
             }
         } while (isItemInInventory(itemName, itemsFile));
 
         // gather data from the user
-        float unitPrice = takeUserInputFloat("UNIT PRICE: ");
-        int quantity = takeUserInputInteger("QUANTITY: ");
+        float unitPrice = takeUserInput.takeUserInputFloat("UNIT PRICE: ");
+        int quantity = takeUserInput.takeUserInputInteger("QUANTITY: ");
 
         // create 'totalPrice' and 'itemId' values
         float totalPrice = quantity * unitPrice;
@@ -45,36 +46,6 @@ public class storeActions {
         // display item added to user
         System.out.printf("%d %s's added at £%.1f each", quantity, itemName, unitPrice);
 
-    }
-
-    /*
-	This method takes a string as input, this string is provided to the user
-	the function then takes the user's response as an integer and returns it
-	 */
-    public Integer takeUserInputInteger(String question){
-        Scanner input = new Scanner(System.in);
-        System.out.print(question);
-        return input.nextInt();
-    }
-
-    /*
-	This method takes a string as input, this string is provided to the user
-	the function then takes the user's response as a string and returns it
-	 */
-    public String takeUserInputString(String question){
-        Scanner input = new Scanner(System.in);
-        System.out.print(question);
-        return input.nextLine();
-    }
-
-    /*
-	This method takes a string as input, this string is provided to the user
-	the function then takes the user's response as a float and returns it
-	 */
-    public Float takeUserInputFloat(String question){
-        Scanner input = new Scanner(System.in);
-        System.out.print(question);
-        return input.nextFloat();
     }
 
     /*
@@ -117,7 +88,7 @@ public class storeActions {
         // check whether the desired item exists in the items file
         String itemName = "";
         do {
-            itemName = takeUserInputString("NAME OF ITEM: ");
+            itemName = takeUserInput.takeUserInputString("NAME OF ITEM: ");
             if (!isItemInInventory(itemName, itemsFile)){
                 System.out.printf("%s not found in inventory\n", itemName);
             }
@@ -132,7 +103,7 @@ public class storeActions {
                 if (Objects.equals(currentItem[1], itemName)) {
 
                     // asks the user for the desired new quantity of the item
-                    int quantity = takeUserInputInteger("UPDATED QUANTITY OF ITEM: ");
+                    int quantity = takeUserInput.takeUserInputInteger("UPDATED QUANTITY OF ITEM: ");
                     float unitPrice = Float.parseFloat(currentItem[2]);
                     float totalPrice = unitPrice * quantity;
 

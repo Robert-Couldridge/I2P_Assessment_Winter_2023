@@ -45,6 +45,7 @@ public class store
 		String itemsFile = "items.txt";
 		boolean running = true;
 		storeActions storeInstance = new storeActions();
+		userInput takeUserInput = new userInput();
 		Scanner input = new Scanner(System.in);
 
 		do
@@ -59,9 +60,8 @@ public class store
 		System.out.println("---------------------------------");
 		System.out.println("6. Exit");
 		
-		
-		System.out.print("\n Enter a choice and Press ENTER to continue[1-5]:");
-		int userInput = input.nextInt();
+
+		int userInput = takeUserInput.takeUserInputInteger("\n Enter a choice and Press ENTER to continue[1-5]:");
 
 			if (userInput>5 || userInput<1) {
 				System.out.println("This doesn't appear to be a valid option...!");
