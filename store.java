@@ -42,7 +42,7 @@ public class store
 {
 	public static void main(String args[])
 	{
-		String items_file = "items.txt";
+		String itemsFile = "items.txt";
 		storeActions storeInstance = new storeActions();
 
 		Scanner input = new Scanner(System.in);
@@ -68,11 +68,11 @@ public class store
 				break;
 			}
 			if (userinput == 1)	{
-				storeInstance.addItem(items_file);
+				storeInstance.addItem(itemsFile);
 				break;
 			}
 			else if (userinput == 2) {
-				storeInstance.updateQuantity(items_file);
+				storeInstance.updateQuantity(itemsFile);
 				System.out.print("\n Item quantity updated");
 				break;
 			}
