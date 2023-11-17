@@ -36,7 +36,7 @@
 
 import java.io.*;
 import java.util.Objects;
-import java.util.Scanner;
+
 
 public class store
 {
@@ -46,48 +46,49 @@ public class store
 		boolean running = true;
 		storeActions storeInstance = new storeActions();
 		userInput takeUserInput = new userInput();
-		Scanner input = new Scanner(System.in);
 
 		do
 		{
-		System.out.println("I N V E N T O R Y    M A N A G E M E N T    S Y S T E M");
-		System.out.println("-----------------------------------------------");
-		System.out.println("1. ADD NEW ITEM");
-		System.out.println("2. UPDATE QUANTITY OF EXISTING ITEM");
-		System.out.println("3. REMOVE ITEM");
-		System.out.println("4. SEARCH FOR AN ITEM");
-		System.out.println("5. VIEW DAILY TRANSACTION REPORT");
-		System.out.println("---------------------------------");
-		System.out.println("6. Exit");
-		
+			System.out.println("I N V E N T O R Y    M A N A G E M E N T    S Y S T E M");
+			System.out.println("-----------------------------------------------");
+			System.out.println("1. ADD NEW ITEM");
+			System.out.println("2. UPDATE QUANTITY OF EXISTING ITEM");
+			System.out.println("3. REMOVE ITEM");
+			System.out.println("4. SEARCH FOR AN ITEM");
+			System.out.println("5. VIEW DAILY TRANSACTION REPORT");
+			System.out.println("---------------------------------");
+			System.out.println("6. Exit");
 
-		int userInput = takeUserInput.takeUserInputInteger("\n Enter a choice and Press ENTER to continue[1-5]:");
 
-			if (userInput>5 || userInput<1) {
-				System.out.println("This doesn't appear to be a valid option...!");
-				break;
-			}
-			if (userInput == 1)	{
-				storeInstance.addItem(itemsFile);
-				break;
-			}
-			else if (userInput == 2) {
-				storeInstance.updateQuantity(itemsFile);
-				System.out.print("\n Item quantity updated");
-				break;
-			}
-			else if (userInput == 3) {
-				System.out.print("\n Item Removed");
-				break;
-			}	
-			else if (userInput == 4) {
-				System.out.print("\n Item Searched");
-				break;
-			}
-			else if (userInput == 5){
-				System.out.print("\n Report printed");
-				break;
-			}
+			int userInput = takeUserInput.takeUserInputInteger("\n Enter a choice and Press ENTER to continue[1-5]:");
+
+				if (userInput>6 || userInput<1) {
+					System.out.println("This doesn't appear to be a valid option...!");
+					break;
+				}
+				if (userInput == 1)	{
+					storeInstance.addItem(itemsFile);
+					break;
+				}
+				else if (userInput == 2) {
+					storeInstance.updateQuantity(itemsFile);
+					break;
+				}
+				else if (userInput == 3) {
+					System.out.print("\n Item Removed");
+					break;
+				}
+				else if (userInput == 4) {
+					System.out.print("\n Item Searched");
+					break;
+				}
+				else if (userInput == 5){
+					System.out.print("\n Report printed");
+					break;
+				}
+				else if (userInput == 6){
+					running = false;
+				}
 		} while(running);
 		
 	System.out.println("\n\n Thanks for using this program...!");

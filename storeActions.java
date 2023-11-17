@@ -1,6 +1,9 @@
 import java.io.*;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class storeActions {
 
@@ -81,12 +84,14 @@ public class storeActions {
     }
 
     /*
-	This method
+	This method asks the user for an item, checks the item is in the inventory
+	then asks the user for an updated quantity, this is then written to the itemsFile
 	 */
     public void updateQuantity(String itemsFile){
 
-        // check whether the desired item exists in the items file
+        // check whether the desired item exists in the itemsFile
         String itemName = "";
+        int quantity = 0;
         do {
             itemName = takeUserInput.takeUserInputString("NAME OF ITEM: ");
             if (!isItemInInventory(itemName, itemsFile)){
@@ -95,32 +100,53 @@ public class storeActions {
         } while (!isItemInInventory(itemName, itemsFile));
         System.out.printf("%s located in inventory\n", itemName);
 
-        // locates the item's records in the item file
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(itemsFile))){
-            String line;
-            while ((line = bufferedReader.readLine()) != null){
-                String[] currentItem = line.split(",");
-                if (Objects.equals(currentItem[1], itemName)) {
+        // create a temporary file to write the updated inventory to
+        try {
+            Path tempFilePath = Files.createTempFile(null,null);
 
-                    // asks the user for the desired new quantity of the item
-                    int quantity = takeUserInput.takeUserInputInteger("UPDATED QUANTITY OF ITEM: ");
-                    float unitPrice = Float.parseFloat(currentItem[2]);
-                    float totalPrice = unitPrice * quantity;
 
-                    // updates the records for the desired new quantity of item
-                    currentItem[4] = String.valueOf(totalPrice);
-                    currentItem[3] = String.valueOf(quantity);
-                    System.out.print(String.join(",", currentItem));
+            // opens the itemsFile in reader and the temporary file in writer
+            try {
+                BufferedReader bufferedReader = new BufferedReader(new FileReader(itemsFile));
+                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tempFilePath.toFile()));
+
+                // iterates through the itemsFile line by line
+                String line;
+                int lines = 0;
+                while ((line = bufferedReader.readLine()) != null) {
+                    String[] currentItem = line.split(",");
+
+                    // locates the specific item
+                    if (Objects.equals(currentItem[1], itemName)) {
+
+                        // asks the user for the desired new quantity of the item
+                        quantity = takeUserInput.takeUserInputInteger("UPDATED QUANTITY OF ITEM: ");
+                        float unitPrice = Float.parseFloat(currentItem[2]);
+                        float totalPrice = unitPrice * quantity;
+
+                        // updates the records for the desired new quantity of item
+                        currentItem[4] = String.valueOf(totalPrice);
+                        currentItem[3] = String.valueOf(quantity);
+                    }
+                    if (lines > 0){
+                        bufferedWriter.newLine();
+                    }
+                    bufferedWriter.write(String.join(",", currentItem));
+                    lines++;
                 }
+                // close reader and writer
+                bufferedReader.close();
+                bufferedWriter.close();
+            } catch (IOException e) {
+                System.out.println("Error: " + e.getMessage());
             }
-        }
-        catch (IOException e){
+
+            // replace the itemsFile with the new temporary file
+            Files.move(tempFilePath, Paths.get(itemsFile), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
-
-
-
-
+        System.out.printf("Inventory now contains %d %s's", quantity, itemName);
     }
 
     /*
@@ -147,6 +173,5 @@ public class storeActions {
         // Return the results of the search in boolean form
         return inFile;
     }
-
 
 }
