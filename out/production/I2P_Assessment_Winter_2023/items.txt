@@ -7,9 +7,3 @@ id,description,unitPrice,qtyInStock,totalPrice
 00006,Value Cover Gasket,4500.0,20,90000.0
 00007,Air Filter,3000.0,15,45000.0
 00008,Radiator Hose,2500.0,100,250000.0
-00009,Radiator,400,6,2400
-00010,Headlight Bulb,2,500,1000
-00011,Wheel Bearing,500,4,2000
-00012,Coolant,5,300,1500
-00013,Water Valve,1000000,28,28000000
-00014,Wheel Nut,3,200,600

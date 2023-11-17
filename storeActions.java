@@ -13,18 +13,18 @@ public class storeActions {
 
         // gather data from the user
         String itemName = takeUserInputString("NAME OF ITEM: ");
-        int unitPrice = takeUserInputInteger("UNIT PRICE: ");
+        float unitPrice = takeUserInputFloat("UNIT PRICE: ");
         int quantity = takeUserInputInteger("QUANTITY: ");
 
         // create 'totalPrice' and 'itemId' values
-        int totalPrice = quantity * unitPrice;
+        float totalPrice = quantity * unitPrice;
         String itemId = generateItemID(itemsFile);
 
         // append data to itemsFile
         try{
             FileWriter out = new FileWriter(itemsFile, true);
             PrintWriter output = new PrintWriter(out);
-            output.printf("%s,%s,%d,%d,%d%n", itemId, itemName, unitPrice, quantity, totalPrice);
+            output.printf("%s,%s,%.1f,%d,%.1f%n", itemId, itemName, unitPrice, quantity, totalPrice);
             output.close();
         }
         catch (FileNotFoundException e){
@@ -35,7 +35,7 @@ public class storeActions {
         }
 
         // display item added to user
-        System.out.printf("%d %s's added at £%d each", quantity, itemName, unitPrice);
+        System.out.printf("%d %s's added at £%.1f each", quantity, itemName, unitPrice);
 
     }
 
@@ -57,6 +57,16 @@ public class storeActions {
         Scanner input = new Scanner(System.in);
         System.out.print(question);
         return input.nextLine();
+    }
+
+    /*
+	This method takes a string as input, this string is provided to the user
+	the function then takes the user's response as a float and returns it
+	 */
+    public Float takeUserInputFloat(String question){
+        Scanner input = new Scanner(System.in);
+        System.out.print(question);
+        return input.nextFloat();
     }
 
     /*
@@ -115,8 +125,8 @@ public class storeActions {
 
                     // asks the user for the desired new quantity of the item
                     int quantity = takeUserInputInteger("UPDATED QUANTITY OF ITEM: ");
-                    int unitPrice = Integer.parseInt(currentItem[2]);
-                    int totalPrice = unitPrice * quantity;
+                    float unitPrice = Float.parseFloat(currentItem[2]);
+                    float totalPrice = unitPrice * quantity;
 
                     // updates the records for the desired new quantity of item
                     currentItem[4] = String.valueOf(totalPrice);
