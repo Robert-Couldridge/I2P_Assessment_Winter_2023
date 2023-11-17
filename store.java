@@ -43,10 +43,12 @@ public class store
 	public static void main(String args[])
 	{
 		String itemsFile = "items.txt";
+		boolean running = true;
 		storeActions storeInstance = new storeActions();
-
 		Scanner input = new Scanner(System.in);
-		
+
+		do
+		{
 		System.out.println("I N V E N T O R Y    M A N A G E M E N T    S Y S T E M");
 		System.out.println("-----------------------------------------------");
 		System.out.println("1. ADD NEW ITEM");
@@ -59,37 +61,34 @@ public class store
 		
 		
 		System.out.print("\n Enter a choice and Press ENTER to continue[1-5]:");
-		int userinput = input.nextInt();
+		int userInput = input.nextInt();
 
-		while(userinput !=6)
-		{
-			if (userinput>5 || userinput<1) {
+			if (userInput>5 || userInput<1) {
 				System.out.println("This doesn't appear to be a valid option...!");
 				break;
 			}
-			if (userinput == 1)	{
+			if (userInput == 1)	{
 				storeInstance.addItem(itemsFile);
 				break;
 			}
-			else if (userinput == 2) {
+			else if (userInput == 2) {
 				storeInstance.updateQuantity(itemsFile);
 				System.out.print("\n Item quantity updated");
 				break;
 			}
-			else if (userinput == 3) {
+			else if (userInput == 3) {
 				System.out.print("\n Item Removed");
 				break;
 			}	
-			else if (userinput == 4) {
+			else if (userInput == 4) {
 				System.out.print("\n Item Searched");
 				break;
 			}
-			else if (userinput == 5){
+			else if (userInput == 5){
 				System.out.print("\n Report printed");
 				break;
 			}
-			
-		}
+		} while(running);
 		
 	System.out.println("\n\n Thanks for using this program...!");
 	}

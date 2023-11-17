@@ -11,8 +11,16 @@ public class storeActions {
 	 */
     public void addItem(String itemsFile){
 
+        // check whether the desired item exists in the items file
+        String itemName = "";
+        do {
+            itemName = takeUserInputString("NAME OF ITEM: ");
+            if (isItemInInventory(itemName, itemsFile)){
+                System.out.printf("%s already in inventory\n", itemName);
+            }
+        } while (isItemInInventory(itemName, itemsFile));
+
         // gather data from the user
-        String itemName = takeUserInputString("NAME OF ITEM: ");
         float unitPrice = takeUserInputFloat("UNIT PRICE: ");
         int quantity = takeUserInputInteger("QUANTITY: ");
 
@@ -105,15 +113,15 @@ public class storeActions {
 	This method
 	 */
     public void updateQuantity(String itemsFile){
-        String itemName = "";
 
         // check whether the desired item exists in the items file
-        while (!isItemInInventory(itemName, itemsFile)){
+        String itemName = "";
+        do {
             itemName = takeUserInputString("NAME OF ITEM: ");
             if (!isItemInInventory(itemName, itemsFile)){
                 System.out.printf("%s not found in inventory\n", itemName);
             }
-        }
+        } while (!isItemInInventory(itemName, itemsFile));
         System.out.printf("%s located in inventory\n", itemName);
 
         // locates the item's records in the item file

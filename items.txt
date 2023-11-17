@@ -8,3 +8,6 @@ id,description,unitPrice,qtyInStock,totalPrice
 00007,Air Filter,3000.0,15,45000.0
 00008,Radiator Hose,2500.0,100,250000.0
 00009,Water Valve,1000000.0,28,28000000.0
+00010,Radiator,300.0,4,1200.0
+00011,Engine Oil,20.0,500,10000.0
+00012,Fan Belt,30.0,70,2100.0
