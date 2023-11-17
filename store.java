@@ -79,7 +79,13 @@ public class store
 					break;
 				}
 				else if (userInput == 4) {
-					System.out.print("\n Item Searched");
+					String itemName = takeUserInput.takeUserInputString("ITEM NAME: ");
+					if(storeInstance.isItemInInventory(itemName,itemsFile,true)){
+						System.out.printf("%s is in inventory", itemName);
+					}
+					else {
+						System.out.printf("%s is not in inventory", itemName);
+					}
 					break;
 				}
 				else if (userInput == 5){

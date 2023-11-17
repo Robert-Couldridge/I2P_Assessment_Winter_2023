@@ -19,10 +19,10 @@ public class storeActions {
         String itemName = "";
         do {
             itemName = takeUserInput.takeUserInputString("NAME OF ITEM: ");
-            if (isItemInInventory(itemName, itemsFile)){
+            if (isItemInInventory(itemName, itemsFile, false)){
                 System.out.printf("%s already in inventory\n", itemName);
             }
-        } while (isItemInInventory(itemName, itemsFile));
+        } while (isItemInInventory(itemName, itemsFile,false));
 
         // gather data from the user
         float unitPrice = takeUserInput.takeUserInputFloat("UNIT PRICE: ");
@@ -94,10 +94,10 @@ public class storeActions {
         int quantity = 0;
         do {
             itemName = takeUserInput.takeUserInputString("NAME OF ITEM: ");
-            if (!isItemInInventory(itemName, itemsFile)){
+            if (!isItemInInventory(itemName, itemsFile,false)){
                 System.out.printf("%s not found in inventory\n", itemName);
             }
-        } while (!isItemInInventory(itemName, itemsFile));
+        } while (!isItemInInventory(itemName, itemsFile,false));
         System.out.printf("%s located in inventory\n", itemName);
 
         // create a temporary file to write the updated inventory to
@@ -153,7 +153,7 @@ public class storeActions {
 	This method iterates through the items file and checks if the
 	provided item name is located in the file, it returns TRUE if found
 	 */
-    public boolean isItemInInventory(String itemName, String itemsFile){
+    public boolean isItemInInventory(String itemName, String itemsFile, boolean displayFindings){
         boolean inFile = false;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(itemsFile))){
             String line;
@@ -162,6 +162,9 @@ public class storeActions {
             while ((line = bufferedReader.readLine()) != null){
                 String[] currentItemName = line.split(",");
                 if (Objects.equals(currentItemName[1], itemName)) {
+                    if (displayFindings){
+                        System.out.printf("ITEM ID: %s%nITEM DESCRIPTION: %s%nUNIT PRICE: %s%nQUANTITY: %s%nTOTAL PRICE: %s%n",
+                                currentItemName[0],currentItemName[1],currentItemName[2],currentItemName[3],currentItemName[4]);                    }
                     inFile = true;
                 }
             }
@@ -173,5 +176,4 @@ public class storeActions {
         // Return the results of the search in boolean form
         return inFile;
     }
-
 }
