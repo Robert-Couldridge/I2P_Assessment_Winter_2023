@@ -43,9 +43,9 @@ public class store
 	public static void main(String args[])
 	{
 		String itemsFile = "items.txt";
-		boolean running = true;
 		storeActions storeInstance = new storeActions();
 		userInput takeUserInput = new userInput();
+		boolean running = true;
 
 		do
 		{
@@ -60,44 +60,45 @@ public class store
 			System.out.println("6. Exit");
 
 
-			int userInput = takeUserInput.takeUserInputInteger("\n Enter a choice and Press ENTER to continue[1-5]:");
+			int userInput = takeUserInput.takeUserInputInteger("\n Enter a choice and Press ENTER to continue[1-6]:");
 
 				if (userInput>6 || userInput<1) {
-					System.out.println("This doesn't appear to be a valid option...!");
-					break;
+					System.out.println("This doesn't appear to be a valid option...!\n");
+					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue");
 				}
 				if (userInput == 1)	{
 					storeInstance.addItem(itemsFile);
-					break;
+					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}
 				else if (userInput == 2) {
 					storeInstance.updateQuantity(itemsFile);
-					break;
+					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}
 				else if (userInput == 3) {
-					System.out.print("\n Item Removed");
-					break;
+					storeInstance.removeItem(itemsFile);
+					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}
 				else if (userInput == 4) {
 					String itemName = takeUserInput.takeUserInputString("ITEM NAME: ");
 					if(storeInstance.isItemInInventory(itemName,itemsFile,true)){
-						System.out.printf("%s is in inventory", itemName);
+						System.out.printf("%s is in inventory\n", itemName);
 					}
 					else {
-						System.out.printf("%s is not in inventory", itemName);
+						System.out.printf("%s is not in inventory\n", itemName);
 					}
-					break;
+					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}
 				else if (userInput == 5){
 					System.out.print("\n Report printed");
-					break;
+					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}
 				else if (userInput == 6){
+					System.out.println("Quitting...");
 					running = false;
 				}
-		} while(running);
+		} while (running);
 		
-	System.out.println("\n\n Thanks for using this program...!");
+	System.out.println("\n\nThanks for using this program.");
 	}
 
 

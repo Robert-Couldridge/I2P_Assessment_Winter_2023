@@ -7,11 +7,13 @@ import java.util.Objects;
 
 public class storeActions {
 
-        userInput takeUserInput = new userInput();
+
+    // create an instance of the userInput class for the following methods to utilise.
+    userInput takeUserInput = new userInput();
     /*
 	This method asks the user to supply an item name, unit price and quantity
 	It then auto generates an item id and calculates the total price of the stock
-	This information is all concatenated into a string that is appended to the itemsFile doc
+	This information is all concatenated into a string that is appended to the items file.
 	 */
     public void addItem(String itemsFile){
 
@@ -47,14 +49,14 @@ public class storeActions {
         }
 
         // display item added to user
-        System.out.printf("%d %s's added at £%.1f each", quantity, itemName, unitPrice);
+        System.out.printf("%d %s's added at £%.1f each\n", quantity, itemName, unitPrice);
 
     }
 
     /*
 	This method iterates through the items file and finds the biggest item ID
 	It then adds 1 to that number before adding any leading 0s to create a 5-digit number
-	This is then converted to a string and returned
+	This is then converted to a string and returned.
 	 */
     public String generateItemID(String itemsFile){
         String itemIdString = "";
@@ -84,8 +86,8 @@ public class storeActions {
     }
 
     /*
-	This method asks the user for an item, checks the item is in the inventory
-	then asks the user for an updated quantity, this is then written to the itemsFile
+	This method asks the user for an item, checks the item is in the items file
+	then asks the user for an updated quantity, this is then written to the items file.
 	 */
     public void updateQuantity(String itemsFile){
 
@@ -146,12 +148,75 @@ public class storeActions {
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
-        System.out.printf("Inventory now contains %d %s's", quantity, itemName);
+        System.out.printf("Inventory now contains %d %s's\n", quantity, itemName);
+    }
+
+    /*
+    This method asks the user for an item, checks the item is in the items file
+    Then removes the item from the itemsFile.
+     */
+    public void removeItem(String itemsFile){
+
+        // check whether the desired item exists in the itemsFile
+        String itemName = "";
+        int quantity = 0;
+        do {
+            itemName = takeUserInput.takeUserInputString("NAME OF ITEM: ");
+            if (!isItemInInventory(itemName, itemsFile,false)){
+                System.out.printf("%s not found in inventory\n", itemName);
+            }
+        } while (!isItemInInventory(itemName, itemsFile,false));
+        System.out.printf("%s located in inventory\n", itemName);
+
+        // create a temporary file to write the updated inventory to
+        try {
+            Path tempFilePath = Files.createTempFile(null,null);
+
+
+            // opens the itemsFile in reader and the temporary file in writer
+            try {
+                BufferedReader bufferedReader = new BufferedReader(new FileReader(itemsFile));
+                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(tempFilePath.toFile()));
+
+                // iterates through the itemsFile line by line
+                String line;
+                int lines = 0;
+                while ((line = bufferedReader.readLine()) != null) {
+                    String[] currentItem = line.split(",");
+
+
+                    // Adds every item to the temporary file other than the specified item
+                    if (!Objects.equals(currentItem[1], itemName)) {
+                        if (lines > 0){
+                            bufferedWriter.newLine();
+                        }
+                        lines++;
+                        bufferedWriter.write(String.join(",", currentItem));
+                    }
+
+                }
+                // close reader and writer
+                bufferedReader.close();
+                bufferedWriter.close();
+            } catch (IOException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+
+            // replace the itemsFile with the new temporary file
+            Files.move(tempFilePath, Paths.get(itemsFile), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        System.out.printf("Inventory no longer contains %s\n", itemName);
+
+
     }
 
     /*
 	This method iterates through the items file and checks if the
-	provided item name is located in the file, it returns TRUE if found
+	Provided item name is located in the file, it returns TRUE if found
+	It can then print out the details of that file if desired.
+
 	 */
     public boolean isItemInInventory(String itemName, String itemsFile, boolean displayFindings){
         boolean inFile = false;
