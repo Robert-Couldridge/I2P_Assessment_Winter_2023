@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class userInput {
@@ -7,9 +8,21 @@ public class userInput {
 	the function then takes the user's response as an integer and returns it
 	 */
     public Integer takeUserInputInteger(String question) {
-        Scanner input = new Scanner(System.in);
-        System.out.print(question);
-        return input.nextInt();
+        boolean validInput = true;
+        int integer = 0;
+        do {
+            Scanner input = new Scanner(System.in);
+            System.out.print(question);
+            try {
+                integer = input.nextInt();
+                validInput = true;
+            } catch (InputMismatchException e) {
+                System.out.print("INVALID INPUT\nPlease enter an Integer\n");
+                validInput = false;
+            }
+        }
+        while (!validInput);
+        return integer;
     }
 
     /*
@@ -31,4 +44,5 @@ public class userInput {
         System.out.print(question);
         return input.nextFloat();
     }
+
 }
