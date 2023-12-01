@@ -44,7 +44,7 @@ public class userInput {
             }
         }
         while (!validInput);
-        return stringInput;
+        return stringInput.toLowerCase();
     }
 
     /*

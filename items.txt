@@ -1,15 +1,16 @@
 id,description,unitPrice,qtyInStock,totalPrice 
-00001,Spark Plug,12000.0,1,12000.0
-00002,Water Pump,120.0,4,480.0
-00004,Coil Pack,10000.0,40,40000.0
-00005,Tensioner,5000.0,12,60000.0
-00006,Value Cover Gasket,4500.0,20,90000.0
-00008,Radiator Hose,2500.0,100,250000.0
-00009,Water Valve,1000000.0,28,28000000.0
-00010,Radiator,300.0,35,10500.0
-00011,Engine Oil,20.0,500,10000.0
-00012,Fan Belt,30.0,70,2100.0
-00013,Brake Pad,179.0,17,3043.0
-00014,Brake Line,40.0,26,1040.0
-00015,Shifter Linkage,150.0,24,3600.0
-00016,Timing Chain,60.0,33,1980.0
+00001,spark plug,12000.0,1,12000.0
+00002,water pump,120.0,6,720.0
+00004,coil pack,10000.0,40,40000.0
+00005,tensioner,5000.0,12,60000.0
+00006,value cover gasket,4500.0,20,90000.0
+00008,radiator hose,2500.0,100,250000.0
+00009,water valve,1000000.0,28,28000000.0
+00010,radiator,300.0,35,10500.0
+00011,engine oil,20.0,500,10000.0
+00012,fan belt,30.0,70,2100.0
+00013,brake pad,179.0,17,3043.0
+00014,brake line,40.0,26,1040.0
+00015,shifter linkage,150.0,24,3600.0
+00016,timing chain,60.0,33,1980.0
+00017,valve cover gasket,70.0,6,420.0

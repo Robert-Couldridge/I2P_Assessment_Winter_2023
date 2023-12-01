@@ -9,13 +9,13 @@ public class testing {
 //        int numberInput = takeUserInput.takeUserInputInteger("Enter A Number: ");
 //        System.out.print(numberInput);
 
-//        // test string
-//        String stringInput = takeUserInput.takeUserInputString("Enter A String: ");
-//        System.out.print(stringInput);
+        // test string
+        String stringInput = takeUserInput.takeUserInputString("Enter A String: ");
+        System.out.print(stringInput);
 
-        // test float
-        float floatInput = takeUserInput.takeUserInputFloat("Enter A Float: ");
-        System.out.print(floatInput);
+//        // test float
+//        float floatInput = takeUserInput.takeUserInputFloat("Enter A Float: ");
+//        System.out.print(floatInput);
     }
 
 
