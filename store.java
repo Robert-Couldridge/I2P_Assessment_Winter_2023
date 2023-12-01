@@ -79,13 +79,17 @@ public class store
 					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}
 				else if (userInput == 4) {
-					String itemName = takeUserInput.takeUserInputString("ITEM NAME: ");
-					if(storeInstance.isItemInInventory(itemName,itemsFile,true)){
-						System.out.printf("%s is in inventory\n", itemName);
-					}
-					else {
-						System.out.printf("%s is not in inventory\n", itemName);
-					}
+					boolean itemLocated = false;
+					do {
+						String itemName = takeUserInput.takeUserInputString("ITEM NAME: ");
+						if (storeInstance.isItemInInventory(itemName, itemsFile, true)) {
+							System.out.printf("%s is in inventory\n", itemName);
+							itemLocated = true;
+						} else {
+							System.out.printf("%s is not in inventory\n", itemName);
+							itemLocated = false;
+						}
+					} while (!itemLocated);
 					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}
 				else if (userInput == 5){

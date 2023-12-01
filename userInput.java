@@ -7,7 +7,7 @@ public class userInput {
 	This method takes a string as input, this string is provided to the user
 	the function then takes the user's response as an integer and returns it
 	 */
-    public Integer takeUserInputInteger(String question) {
+    protected Integer takeUserInputInteger(String question) {
         boolean validInput = true;
         int integerInput = 0;
         do {
@@ -29,7 +29,7 @@ public class userInput {
 	This method takes a string as input, this string is provided to the user
 	the function then takes the user's response as a string and returns it
 	 */
-    public String takeUserInputString(String question){
+    protected String takeUserInputString(String question){
         boolean validInput = true;
         String stringInput = "";
         do {
@@ -51,7 +51,7 @@ public class userInput {
    This method takes a string as input, this string is provided to the user
    the function then takes the user's response as a float and returns it
     */
-    public Float takeUserInputFloat(String question){
+    protected Float takeUserInputFloat(String question){
         boolean validInput = true;
         float floatInput = 0.0F;
         do {

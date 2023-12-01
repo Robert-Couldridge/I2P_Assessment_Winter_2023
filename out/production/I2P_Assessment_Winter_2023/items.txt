@@ -1,6 +1,6 @@
 id,description,unitPrice,qtyInStock,totalPrice 
 00001,spark plug,12000.0,1,12000.0
-00002,water pump,120.0,4,480.0
+00002,water pump,120.0,8,960.0
 00004,coil pack,10000.0,40,40000.0
 00005,tensioner,5000.0,12,60000.0
 00006,value cover gasket,4500.0,20,90000.0
@@ -13,3 +13,4 @@ id,description,unitPrice,qtyInStock,totalPrice
 00014,brake line,40.0,26,1040.0
 00015,shifter linkage,150.0,24,3600.0
 00016,timing chain,60.0,33,1980.0
+00017,valve cover gasket,70.0,6,420.0

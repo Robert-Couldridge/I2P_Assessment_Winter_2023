@@ -15,7 +15,7 @@ public class storeActions {
 	It then auto generates an item id and calculates the total price of the stock
 	This information is all concatenated into a string that is appended to the items file.
 	 */
-    public void addItem(String itemsFile){
+    protected void addItem(String itemsFile){
 
         // check whether the desired item exists in the items file
         String itemName = "";
@@ -58,7 +58,7 @@ public class storeActions {
 	It then adds 1 to that number before adding any leading 0s to create a 5-digit number
 	This is then converted to a string and returned.
 	 */
-    public String generateItemID(String itemsFile){
+    protected String generateItemID(String itemsFile){
         String itemIdString = "";
         int itemIdInt = 0;
 
@@ -89,7 +89,7 @@ public class storeActions {
 	This method asks the user for an item, checks the item is in the items file
 	then asks the user for an updated quantity, this is then written to the items file.
 	 */
-    public void updateQuantity(String itemsFile){
+    protected void updateQuantity(String itemsFile){
 
         // check whether the desired item exists in the itemsFile
         String itemName = "";
@@ -155,7 +155,7 @@ public class storeActions {
     This method asks the user for an item, checks the item is in the items file
     Then removes the item from the itemsFile.
      */
-    public void removeItem(String itemsFile){
+    protected void removeItem(String itemsFile){
 
         // check whether the desired item exists in the itemsFile
         String itemName = "";
@@ -218,7 +218,7 @@ public class storeActions {
 	It can then print out the details of that file if desired.
 
 	 */
-    public boolean isItemInInventory(String itemName, String itemsFile, boolean displayFindings){
+    protected boolean isItemInInventory(String itemName, String itemsFile, boolean displayFindings){
         boolean inFile = false;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(itemsFile))){
             String line;
