@@ -93,7 +93,8 @@ public class store
 					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}
 				else if (userInput == 5){
-					System.out.print("\n Report printed");
+					storeInstance.displayTransactionReport();
+					System.out.print("\n Report printed\n");
 					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}
 				else if (userInput == 6){
@@ -103,6 +104,8 @@ public class store
 		} while (running);
 		
 	System.out.println("\n\nThanks for using this program.");
+	storeInstance.clearTransactionReport();
+	System.out.println("\n--------------------------\nTransaction Report Cleared\n--------------------------");
 	}
 
 

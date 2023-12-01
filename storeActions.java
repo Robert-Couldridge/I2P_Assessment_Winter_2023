@@ -10,6 +10,7 @@ public class storeActions {
 
     // create an instance of the userInput class for the following methods to utilise.
     userInput takeUserInput = new userInput();
+
     /*
 	This method asks the user to supply an item name, unit price and quantity
 	It then auto generates an item id and calculates the total price of the stock
@@ -38,7 +39,7 @@ public class storeActions {
         try{
             FileWriter out = new FileWriter(itemsFile, true);
             PrintWriter output = new PrintWriter(out);
-            output.printf("%n%s,%s,%.1f,%d,%.1f", itemId, itemName, unitPrice, quantity, totalPrice);
+            output.printf("%n%s,%s,%.2f,%d,%.2f", itemId, itemName, unitPrice, quantity, totalPrice);
             output.close();
         }
         catch (FileNotFoundException e){
@@ -48,8 +49,11 @@ public class storeActions {
             System.out.println("Error: " + e.getMessage());
         }
 
+        // add to transaction report
+        addToTransactionReport(itemId,itemName,0,unitPrice,quantity,"Added A New Item");
+
         // display item added to user
-        System.out.printf("%d %s's added at £%.1f each\n", quantity, itemName, unitPrice);
+        System.out.printf("%d %s's added at £%.2f each\n", quantity, itemName, unitPrice);
 
     }
 
@@ -159,7 +163,6 @@ public class storeActions {
 
         // check whether the desired item exists in the itemsFile
         String itemName = "";
-        int quantity = 0;
         do {
             itemName = takeUserInput.takeUserInputString("NAME OF ITEM: ");
             if (!isItemInInventory(itemName, itemsFile,false)){
@@ -216,7 +219,6 @@ public class storeActions {
 	This method iterates through the items file and checks if the
 	Provided item name is located in the file, it returns TRUE if found
 	It can then print out the details of that file if desired.
-
 	 */
     protected boolean isItemInInventory(String itemName, String itemsFile, boolean displayFindings){
         boolean inFile = false;
@@ -240,5 +242,56 @@ public class storeActions {
 
         // Return the results of the search in boolean form
         return inFile;
+    }
+
+    protected void addToTransactionReport(String itemID, String itemDescription, int qtySold, float amount, int stockRemaining, String transactionType){
+        // append data to itemsFile
+        try{
+            FileWriter out = new FileWriter("transactions.txt", true);
+            PrintWriter output = new PrintWriter(out);
+            output.printf("%n%s,%s,%d,%.2f,%d,%s", itemID, itemDescription, qtySold, amount, stockRemaining, transactionType);
+            output.close();
+        }
+        catch (FileNotFoundException e){
+            System.out.print("'transactions.txt' NOT FOUND");
+        }
+        catch (IOException e){
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    protected void displayTransactionReport(){
+
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"))) {
+            String line;
+
+            // print out the transaction report line by line
+            while ((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e){
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    /*
+     Wipes all transactions from the 'transactions.txt' file
+     Whilst leaving the contents line in place
+     */
+    protected void clearTransactionReport(){
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"))) {
+
+            // copy the contents of the transactions.txt file
+            String contents = bufferedReader.readLine();
+
+            // erase the file and then reinstate the contents line
+            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("transactions.txt"))){
+                bufferedWriter.write(contents);
+            }
+        }
+        catch (IOException e){
+            System.out.println("Error clearing the transactions.txt file");
+            e.printStackTrace();
+        }
     }
 }
