@@ -1,14 +1,23 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * A selection of methods that allow for easy input requests from the user
+ * @author Robert Couldridge
+ * @version 1.0
+ * @since 1.0
+ */
 public class userInput {
 
-    /*
-	This method takes a string as input, this string is provided to the user
-	the function then takes the user's response as an integer and returns it
+    /**
+     * This method takes a string as input, this string is provided to the user
+     * the function then takes the user's response as an integer and returns it
+     *
+     * @param question This is the question the program will ask the user
+     * @return Int - The integer the user entered
 	 */
     protected Integer takeUserInputInteger(String question) {
-        boolean validInput = true;
+        boolean validInput;
         int integerInput = 0;
         do {
             Scanner input = new Scanner(System.in);
@@ -25,12 +34,15 @@ public class userInput {
         return integerInput;
     }
 
-    /*
-	This method takes a string as input, this string is provided to the user
-	the function then takes the user's response as a string and returns it
+    /**
+     * This method takes a string as input, this string is provided to the user
+     * the function then takes the user's response as a string and returns it
+     *
+     * @param question This is the question the program will ask the user
+     * @return String - The string the user entered
 	 */
     protected String takeUserInputString(String question){
-        boolean validInput = true;
+        boolean validInput;
         String stringInput = "";
         do {
             Scanner input = new Scanner(System.in);
@@ -47,12 +59,15 @@ public class userInput {
         return stringInput.toLowerCase();
     }
 
-    /*
-   This method takes a string as input, this string is provided to the user
-   the function then takes the user's response as a float and returns it
+    /**
+     * This method takes a string as input, this string is provided to the user
+     * the function then takes the user's response as a float and returns it
+     *
+     * @param question This is the question the program will ask the user
+     * @return Float - The float the user entered
     */
     protected Float takeUserInputFloat(String question){
-        boolean validInput = true;
+        boolean validInput;
         float floatInput = 0.0F;
         do {
             Scanner input = new Scanner(System.in);

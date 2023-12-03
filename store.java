@@ -34,13 +34,12 @@
  */
 
 
-import java.io.*;
-import java.util.Objects;
+
 
 
 public class store
 {
-	public static void main(String args[])
+	public static void main(String[] args)
 	{
 		String itemsFile = "items.txt";
 		storeActions storeInstance = new storeActions();
@@ -79,7 +78,7 @@ public class store
 					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}
 				else if (userInput == 4) {
-					boolean itemLocated = false;
+					boolean itemLocated;
 					do {
 						String itemName = takeUserInput.takeUserInputString("ITEM NAME: ");
 						if (storeInstance.isItemInInventory(itemName, itemsFile, true)) {

@@ -6,16 +6,25 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * A selection of methods that represent the majority of actions the inventory
+ * management system carries out
+ * @author Robert Couldridge
+ * @version 1.0
+ * @since 1.0
+ */
 public class storeActions {
 
 
     // create an instance of the userInput class for the following methods to utilise.
     userInput takeUserInput = new userInput();
 
-    /*
-	This method asks the user to supply an item name, unit price and quantity
-	It then auto generates an item id and calculates the total price of the stock
-	This information is all concatenated into a string that is appended to the items file.
+    /**
+     * This method asks the user to supply an item name, unit price and quantity
+     * it then auto generates an item id and calculates the total price of the stock
+     * this information is all concatenated into a string that is appended to the items file.
+     *
+     * @param itemsFile This the name of the file that stores all the inventory records i.e "items.txt"
 	 */
     protected void addItem(String itemsFile){
 
@@ -58,10 +67,13 @@ public class storeActions {
 
     }
 
-    /*
-	This method iterates through the items file and finds the biggest item ID
-	It then adds 1 to that number before adding any leading 0s to create a 5-digit number
-	This is then converted to a string and returned.
+    /**
+     * This method iterates through the items file and finds the biggest item ID
+     * it then adds 1 to that number before adding any leading 0s to create a 5-digit number
+     * this is then converted to a string and returned.
+     *
+     * @param itemsFile This the name of the file that stores all the inventory records i.e "items.txt"
+     * @return String- This returns a 5 digit unique item ID
 	 */
     protected String generateItemID(String itemsFile){
         int itemIdInt = 0;
@@ -93,9 +105,11 @@ public class storeActions {
         return String.format("%05d", itemIdInt);
     }
 
-    /*
-	This method asks the user for an item, checks the item is in the items file
-	then asks the user for an updated quantity, this is then written to the items file.
+    /**
+     * This method asks the user for an item, checks the item is in the items file
+     * then asks the user for an updated quantity, this is then written to the items file.
+     *
+     * @param itemsFile This the name of the file that stores all the inventory records i.e "items.txt"
 	 */
     protected void updateQuantity(String itemsFile){
 
@@ -173,9 +187,11 @@ public class storeActions {
         System.out.printf("Inventory now contains %d %s's\n", quantity, itemName);
     }
 
-    /*
-    This method asks the user for an item, checks the item is in the items file
-    Then removes the item from the itemsFile.
+    /**
+     * This method asks the user for an item, checks the item is in the items file
+     * then removes the item from the itemsFile.
+     *
+     * @param itemsFile This the name of the file that stores all the inventory records i.e "items.txt"
      */
     protected void removeItem(String itemsFile){
 
@@ -242,10 +258,16 @@ public class storeActions {
 
     }
 
-    /*
-	This method iterates through the items file and checks if the
-	Provided item name is located in the file, it returns TRUE if found
-	It can then print out the details of that file if desired.
+    /**
+     * This method iterates through the items file and checks if the
+     * provided item name is located in the file, it returns 'true' if found
+     * it can then print out the details of that file if desired.
+     *
+     * @param itemName This is the name of the item to search for
+     * @param itemsFile This the name of the file that stores all the inventory records i.e "items.txt"
+     * @param displayFindings This gives the user the option to have the item's information displayed in
+     *                        the console if located in the itemsFile
+     * @return boolean This returns 'true' if the item is in the itemsFile and 'false' if not
 	 */
     protected boolean isItemInInventory(String itemName, String itemsFile, boolean displayFindings){
         boolean inFile = false;
@@ -272,9 +294,16 @@ public class storeActions {
         return inFile;
     }
 
-    /*
-    This method takes 6 inputs, an itemIO, itemDescription, qtySold, amount, stockRemaining, transactionType
-    Using these values it creates a new line in the transaction report to reflect the action that has occurred
+    /**
+     * This method takes 6 inputs, an itemIO, itemDescription, qtySold, amount, stockRemaining, transactionType
+     * using these values it creates a new line in the transaction report to reflect the action that has occurred
+     *
+     * @param itemID This is the item ID of the item edited
+     * @param itemDescription This is the item description of the item edited
+     * @param qtySold This is the quantity of the item sold
+     * @param amount This is the unit price of the item edited
+     * @param stockRemaining This is the stock of the item left in the inventory
+     * @param transactionType This is the type of transaction that has occurred
      */
     protected void addToTransactionReport(String itemID, String itemDescription, int qtySold, float amount, int stockRemaining, String transactionType){
 
@@ -292,8 +321,8 @@ public class storeActions {
         }
     }
 
-    /*
-    This method prints the transaction report out line by line in the console
+    /**
+     * This method prints the transaction report out line by line in the console
      */
     protected void displayTransactionReport(){
 
@@ -309,9 +338,9 @@ public class storeActions {
         }
     }
 
-    /*
-     This method wipes all transactions from the 'transactions.txt' file
-     Whilst leaving the top line or 'column headers' in place
+    /**
+     * This method wipes all transactions from the 'transactions.txt' file
+     * whilst leaving the top line or 'column headers' in place
      */
     protected void clearTransactionReport(){
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"))) {
