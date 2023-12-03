@@ -49,8 +49,8 @@ public class storeActions {
             System.out.println("Error: " + e.getMessage());
         }
 
-        // add to transaction report
-        addToTransactionReport(itemId,itemName,0,unitPrice,quantity,"Added A New Item");
+        // update the transaction report
+        addToTransactionReport(itemId,itemName,0,unitPrice,quantity,"Item Added To Inventory");
 
         // display item added to user
         System.out.printf("%d %s's added at £%.2f each\n", quantity, itemName, unitPrice);
@@ -171,6 +171,8 @@ public class storeActions {
         } while (!isItemInInventory(itemName, itemsFile,false));
         System.out.printf("%s located in inventory\n", itemName);
 
+        String[] item = {"Null", "Null", "Null", "Null", "Null"};
+
         // create a temporary file to write the updated inventory to
         try {
             Path tempFilePath = Files.createTempFile(null,null);
@@ -195,6 +197,8 @@ public class storeActions {
                         }
                         lines++;
                         bufferedWriter.write(String.join(",", currentItem));
+                    } else {
+                        item = currentItem;
                     }
 
                 }
@@ -210,6 +214,10 @@ public class storeActions {
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
+
+        // update the transaction report
+        addToTransactionReport(item[0], item[1], 0, Float.parseFloat(item[2]), 0, "Item Removed From Inventory");
+
         System.out.printf("Inventory no longer contains %s\n", itemName);
 
 
@@ -231,7 +239,8 @@ public class storeActions {
                 if (Objects.equals(currentItemName[1], itemName)) {
                     if (displayFindings){
                         System.out.printf("ITEM ID: %s%nITEM DESCRIPTION: %s%nUNIT PRICE: %s%nQUANTITY: %s%nTOTAL PRICE: %s%n",
-                                currentItemName[0],currentItemName[1],currentItemName[2],currentItemName[3],currentItemName[4]);                    }
+                                currentItemName[0],currentItemName[1],currentItemName[2],currentItemName[3],currentItemName[4]);
+                    }
                     inFile = true;
                 }
             }
@@ -245,7 +254,7 @@ public class storeActions {
     }
 
     protected void addToTransactionReport(String itemID, String itemDescription, int qtySold, float amount, int stockRemaining, String transactionType){
-        // append data to itemsFile
+
         try{
             FileWriter out = new FileWriter("transactions.txt", true);
             PrintWriter output = new PrintWriter(out);
@@ -275,8 +284,8 @@ public class storeActions {
     }
 
     /*
-     Wipes all transactions from the 'transactions.txt' file
-     Whilst leaving the contents line in place
+     This method wipes all transactions from the 'transactions.txt' file
+     Whilst leaving the top line or 'column headers' in place
      */
     protected void clearTransactionReport(){
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"))) {
