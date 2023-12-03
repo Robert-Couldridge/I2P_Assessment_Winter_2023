@@ -3,6 +3,7 @@ import java.nio.file.StandardCopyOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class storeActions {
@@ -63,21 +64,25 @@ public class storeActions {
 	This is then converted to a string and returned.
 	 */
     protected String generateItemID(String itemsFile){
-        String itemIdString = "";
         int itemIdInt = 0;
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(itemsFile))){
             String line;
+            int lineNumber = 0;
 
             // Iterate through the itemsFile file line by line finding the largest item ID and adding 1
             while ((line = bufferedReader.readLine()) != null){
                 String[] currentItemId = line.split(",");
-                try{
+
+                // Skip the column header line
+                if (lineNumber > 0){
+
                     int currentItemIdNumber = Integer.parseInt(currentItemId[0]);
                     if (currentItemIdNumber >= itemIdInt){
                         itemIdInt = currentItemIdNumber + 1;
                     }
-                }catch (NumberFormatException e){;}
+                }
+                lineNumber++;
             }
         }
         catch (IOException e){
@@ -85,8 +90,7 @@ public class storeActions {
         }
 
         // Return item ID as a 5-digit number in string form
-        itemIdString = String.format("%05d", itemIdInt);
-        return itemIdString;
+        return String.format("%05d", itemIdInt);
     }
 
     /*
@@ -106,6 +110,8 @@ public class storeActions {
         } while (!isItemInInventory(itemName, itemsFile,true));
         System.out.printf("%s located in inventory\n", itemName);
 
+        String[] item = {"Null", "Null", "Null", "Null", "Null"};
+
         // create a temporary file to write the updated inventory to
         try {
             Path tempFilePath = Files.createTempFile(null,null);
@@ -124,6 +130,9 @@ public class storeActions {
 
                     // locates the specific item
                     if (Objects.equals(currentItem[1], itemName)) {
+
+                        // stores the information about the item for later in the method
+                        item = Arrays.copyOf(currentItem, 4);
 
                         // asks the user for the desired new quantity of the item
                         quantity = takeUserInput.takeUserInputInteger("UPDATED QUANTITY OF ITEM: ");
@@ -152,6 +161,15 @@ public class storeActions {
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
+
+        // update the transaction report
+        int qtySold;
+        if (Integer.parseInt(item[3]) > quantity){
+            qtySold = Integer.parseInt(item[3]) - quantity;
+        }
+        else {qtySold=0;}
+        addToTransactionReport(item[0], item[1], qtySold, Float.parseFloat(item[2]), quantity, "Item Quantity Updated");
+
         System.out.printf("Inventory now contains %d %s's\n", quantity, itemName);
     }
 
@@ -198,6 +216,7 @@ public class storeActions {
                         lines++;
                         bufferedWriter.write(String.join(",", currentItem));
                     } else {
+                        // stores the information about the item for later in the method
                         item = currentItem;
                     }
 
@@ -253,6 +272,10 @@ public class storeActions {
         return inFile;
     }
 
+    /*
+    This method takes 6 inputs, an itemIO, itemDescription, qtySold, amount, stockRemaining, transactionType
+    Using these values it creates a new line in the transaction report to reflect the action that has occurred
+     */
     protected void addToTransactionReport(String itemID, String itemDescription, int qtySold, float amount, int stockRemaining, String transactionType){
 
         try{
@@ -269,6 +292,9 @@ public class storeActions {
         }
     }
 
+    /*
+    This method prints the transaction report out line by line in the console
+     */
     protected void displayTransactionReport(){
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader("transactions.txt"))) {
@@ -299,8 +325,7 @@ public class storeActions {
             }
         }
         catch (IOException e){
-            System.out.println("Error clearing the transactions.txt file");
-            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }
