@@ -62,22 +62,32 @@ public class store
 			int userInput = takeUserInput.takeUserInputInteger("\n Enter a choice and Press ENTER to continue[1-6]:");
 
 				if (userInput>6 || userInput<1) {
+
+					// catch invalid entries
 					System.out.println("This doesn't appear to be a valid option...!\n");
 					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue");
 				}
 				if (userInput == 1)	{
+
+					// add an item
 					storeInstance.addItem(itemsFile);
 					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}
 				else if (userInput == 2) {
+
+					// update the quantity of an item
 					storeInstance.updateQuantity(itemsFile);
 					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}
 				else if (userInput == 3) {
+
+					// remove an item
 					storeInstance.removeItem(itemsFile);
 					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}
 				else if (userInput == 4) {
+
+					// search for an item
 					boolean itemLocated;
 					do {
 						String itemName = takeUserInput.takeUserInputString("ITEM NAME: ");
@@ -92,17 +102,25 @@ public class store
 					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}
 				else if (userInput == 5){
+
+					// display the transaction report
 					storeInstance.displayTransactionReport();
 					System.out.print("\n Report printed\n");
 					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}
 				else if (userInput == 6){
+
+					// end the program
 					System.out.println("Quitting...");
 					running = false;
 				}
+
+		// ensures the program remains active until the user requests to exit
 		} while (running);
 		
 	System.out.println("\n\nThanks for using this program.");
+
+	// clear the transaction report ready for the next time the program is run
 	storeInstance.clearTransactionReport();
 	System.out.println("\n--------------------------\nTransaction Report Cleared\n--------------------------");
 	}

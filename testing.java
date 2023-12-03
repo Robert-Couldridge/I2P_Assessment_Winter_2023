@@ -1,3 +1,10 @@
+/**
+ * A set of tests designed to stress test the 'userInput.java' methods
+ * @author Robert Couldridge
+ * @version 1.0
+ * @since 1.0
+ */
+
 public class testing {
 
     public static void main(String args[]){
