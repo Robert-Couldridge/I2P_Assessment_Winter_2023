@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 /**
  * A selection of methods that allow for easy input requests from the user
+ * This is used by storeActions.java and store.java
  * @author Robert Couldridge
  * @version 1.0
  * @since 1.0

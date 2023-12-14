@@ -8,7 +8,7 @@ import java.util.Objects;
 
 /**
  * A selection of methods that represent the majority of actions the inventory
- * management system carries out
+ * management system (store.java) uses
  * @author Robert Couldridge
  * @version 1.0
  * @since 1.0
