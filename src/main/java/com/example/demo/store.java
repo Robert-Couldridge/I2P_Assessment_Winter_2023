@@ -96,7 +96,6 @@ public class store
 
 	// clear the transaction report ready for the next time the program is run
 	storeInstance.clearTransactionReport();
-	System.out.println("\n--------------------------\nTransaction Report Cleared\n--------------------------");
 	}
 
 

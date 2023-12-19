@@ -360,5 +360,6 @@ public class storeActions {
         catch (IOException e){
             System.out.println("Error: " + e.getMessage());
         }
+        System.out.println("\n--------------------------\nTransaction Report Cleared\n--------------------------");
     }
 }

@@ -31,18 +31,18 @@
    </StackPane>
         <HBox prefHeight="27.0" prefWidth="383.0">
             <children>
-                <Button fx:id="addItem" onAction="#onHelloButtonClick" snapToPixel="false" style="-fx-background-color: #666769; -fx-border-color: #bfbfbf;" text="Add Item" textAlignment="CENTER">
+                <Button fx:id="addItem" onAction="#addAnItem" snapToPixel="false" style="-fx-background-color: #666769; -fx-border-color: #bfbfbf;" text="Add Item" textAlignment="CENTER">
             <HBox.margin>
                <Insets />
             </HBox.margin>
             <font>
                <Font size="16.0" />
             </font></Button>
-                <Button fx:id="updateQuantity" onAction="#onHelloButtonClick" style="-fx-background-color: #666769; -fx-border-color: #bfbfbf;" text="Update Quantity of an Item" textAlignment="CENTER">
+                <Button fx:id="updateQuantity" onAction="#updateQuantity" style="-fx-background-color: #666769; -fx-border-color: #bfbfbf;" text="Update Quantity of an Item" textAlignment="CENTER">
             <font>
                <Font size="16.0" />
             </font></Button>
-                <Button fx:id="removeItem" onAction="#onHelloButtonClick" style="-fx-background-color: #666769; -fx-border-color: #bfbfbf;" text="Remove an Item" textAlignment="CENTER">
+                <Button fx:id="removeItem" onAction="#removeAnItem" style="-fx-background-color: #666769; -fx-border-color: #bfbfbf;" text="Remove an Item" textAlignment="CENTER">
             <font>
                <Font size="16.0" />
             </font></Button>
@@ -56,7 +56,7 @@
         </HBox>
         <HBox prefHeight="33.0" prefWidth="383.0">
             <children>
-                <Button fx:id="searchItem" onAction="#onHelloButtonClick" style="-fx-background-color: #666769; -fx-border-color: #bfbfbf;" text="Search for an Item" textAlignment="CENTER">
+                <Button fx:id="searchItem" onAction="#searchForItem" style="-fx-background-color: #666769; -fx-border-color: #bfbfbf;" text="Search for an Item" textAlignment="CENTER">
             <font>
                <Font size="16.0" />
             </font></Button>
