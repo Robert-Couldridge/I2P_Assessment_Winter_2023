@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="TOP_CENTER" prefHeight="264.0" prefWidth="423.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HelloController">
+<padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" />
+</padding>
+   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Car Parts Inventory Management System">
+      <font>
+         <Font size="16.0" />
+      </font>
+      <VBox.margin>
+         <Insets top="10.0" />
+      </VBox.margin></Text>
+   <HBox prefHeight="27.0" prefWidth="383.0">
+      <children>
+         <Button onAction="#onHelloButtonClick" snapToPixel="false" text="Add Item" />
+         <Button onAction="#onHelloButtonClick" text="Update Quantity of an Item" />
+         <Button onAction="#onHelloButtonClick" text="Remove an Item" />
+      </children>
+      <padding>
+         <Insets left="30.0" />
+      </padding>
+   </HBox>
+   <HBox prefHeight="33.0" prefWidth="383.0">
+      <children>
+      <Button onAction="#onHelloButtonClick" text="Search for an Item" />
+         <Button onAction="#onHelloButtonClick" text="Display the Transaction Report" />
+         <Button onAction="#onHelloButtonClick" text="Exit" />
+      </children>
+      <padding>
+         <Insets left="29.0" />
+      </padding>
+   </HBox>
+</VBox>
