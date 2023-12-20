@@ -1,6 +1,5 @@
 id,description,unitPrice,qtyInStock,totalPrice 
 00001,spark plug,12000.00,1,12000.00
-00002,water pump,120.00,2,240.0
 00004,coil pack,10000.00,40,40000.00
 00005,tensioner,5000.00,12,60000.00
 00006,value cover gasket,4500.00,20,90000.00
@@ -14,3 +13,4 @@ id,description,unitPrice,qtyInStock,totalPrice
 00015,shifter linkage,150.00,24,3600.00
 00016,timing chain,60.00,33,1980.00
 00017,valve cover gasket,70.00,6,420.00
+00018,water pump,160.00,4,640.00
