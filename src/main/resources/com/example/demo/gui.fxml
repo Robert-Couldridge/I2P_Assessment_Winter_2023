@@ -79,16 +79,36 @@
         </HBox>
    <HBox prefHeight="100.0" prefWidth="200.0">
       <children>
-         <TextField fx:id="itemName" maxWidth="-Infinity" prefHeight="30.0" prefWidth="302.0" promptText="item name" visible="false">
-            <font>
-               <Font size="14.0" />
-            </font>
-            <HBox.margin>
-               <Insets left="50.0" top="10.0" />
-            </HBox.margin>
-         </TextField>
-         <VBox prefHeight="100.0" prefWidth="90.0">
+         <VBox prefHeight="142.0" prefWidth="362.0">
             <children>
+               <TextField fx:id="itemName" maxWidth="-Infinity" prefHeight="30.0" prefWidth="302.0" promptText="item name" visible="false">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+                  <VBox.margin>
+                     <Insets left="50.0" top="10.0" />
+                  </VBox.margin>
+               </TextField>
+               <TextField fx:id="itemUnitPrice" maxWidth="-Infinity" prefHeight="30.0" prefWidth="302.0" promptText="unit price" visible="false">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+                  <VBox.margin>
+                     <Insets left="50.0" top="40.0" />
+                  </VBox.margin>
+               </TextField>
+            </children>
+         </VBox>
+         <VBox prefHeight="131.0" prefWidth="443.0">
+            <children>
+               <TextField fx:id="itemQuantity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="302.0" promptText="item quantity" visible="false">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+                  <VBox.margin>
+                     <Insets left="50.0" top="10.0" />
+                  </VBox.margin>
+               </TextField>
                <Button fx:id="submit" onAction="#submit" prefHeight="31.0" prefWidth="70.0" style="-fx-background-color: #666769; -fx-border-color: #bfbfbf;" text="Submit" textAlignment="CENTER" visible="false">
                   <font>
                      <Font size="14.0" />
@@ -99,14 +119,6 @@
                </Button>
             </children>
          </VBox>
-         <TextField fx:id="itemQuantity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="302.0" promptText="item quantity" visible="false">
-            <font>
-               <Font size="14.0" />
-            </font>
-            <HBox.margin>
-               <Insets top="10.0" />
-            </HBox.margin>
-         </TextField>
       </children>
    </HBox>
     </VBox>

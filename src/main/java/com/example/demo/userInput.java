@@ -19,6 +19,7 @@ public class userInput {
      * @param question This is the question the program will ask the user
      * @return Int - The integer the user entered
 	 */
+
     protected Integer takeUserInputInteger(String question) {
         boolean validInput;
         int integerInput = 0;
@@ -35,6 +36,25 @@ public class userInput {
         }
         while (!validInput);
         return integerInput;
+    }
+    protected Integer integerConversion(String value) {
+            try {
+                int integerInput = Integer.parseInt(value);
+            } catch (InputMismatchException e) {
+                System.out.print("INVALID INPUT\nPlease enter an Integer\n");
+                return -1;
+            }
+        return Integer.parseInt(value);
+    }
+
+    protected Float floatConversion(String value) {
+        try {
+            float floatInput = Float.parseFloat(value);
+        } catch (InputMismatchException e) {
+            System.out.print("INVALID INPUT\nPlease enter an Integer\n");
+            return -1f;
+        }
+        return Float.parseFloat(value);
     }
 
     /**

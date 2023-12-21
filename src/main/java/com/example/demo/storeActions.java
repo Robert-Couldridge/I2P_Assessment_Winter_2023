@@ -30,20 +30,12 @@ public class storeActions {
      *
      * @param itemsFile This the name of the file that stores all the inventory records i.e "items.txt"
 	 */
-    protected void addItem(String itemsFile){
+    protected int addItem(String itemsFile, String itemName, int quantity, float unitPrice){
 
         // check whether the desired item exists in the items file
-        String itemName = "";
-        do {
-            itemName = takeUserInput.takeUserInputString("NAME OF ITEM: ");
-            if (isItemInInventory(itemName, itemsFile, true)){
-                System.out.printf("%s already in inventory\n", itemName);
+        if (isItemInInventory(itemName, itemsFile, true)){
+            return 1;
             }
-        } while (isItemInInventory(itemName, itemsFile,false));
-
-        // gather data from the user
-        float unitPrice = takeUserInput.takeUserInputFloat("UNIT PRICE: ");
-        int quantity = takeUserInput.takeUserInputInteger("QUANTITY: ");
 
         // create 'totalPrice' and 'itemId' values
         float totalPrice = quantity * unitPrice;
@@ -68,6 +60,7 @@ public class storeActions {
 
         // display item added to user
         System.out.printf("%d %s's added at £%.2f each\n", quantity, itemName, unitPrice);
+        return 0;
 
     }
 
@@ -153,7 +146,7 @@ public class storeActions {
                         item = Arrays.copyOf(currentItem, 4);
 
                         // asks the user for the desired new quantity of the item
-                        quantity = takeUserInput.takeUserInputInteger("UPDATED QUANTITY OF ITEM: ");
+                        // quantity = takeUserInput.takeUserInputInteger("UPDATED QUANTITY OF ITEM: ");
                         float unitPrice = Float.parseFloat(currentItem[2]);
                         float totalPrice = unitPrice * quantity;
 
@@ -197,17 +190,12 @@ public class storeActions {
      *
      * @param itemsFile This the name of the file that stores all the inventory records i.e "items.txt"
      */
-    protected void removeItem(String itemsFile){
+    protected int removeItem(String itemsFile, String itemName){
 
         // check whether the desired item exists in the itemsFile
-        String itemName = "";
-        do {
-            itemName = takeUserInput.takeUserInputString("NAME OF ITEM: ");
-            if (!isItemInInventory(itemName, itemsFile,false)){
-                System.out.printf("%s not found in inventory\n", itemName);
-            }
-        } while (!isItemInInventory(itemName, itemsFile,false));
-        System.out.printf("%s located in inventory\n", itemName);
+        if (!isItemInInventory(itemName, itemsFile,false)) {
+            return 1;
+        }
 
         String[] item = {"Null", "Null", "Null", "Null", "Null"};
 
@@ -258,8 +246,7 @@ public class storeActions {
         addToTransactionReport(item[0], item[1], 0, Float.parseFloat(item[2]), 0, "Item Removed From Inventory");
 
         System.out.printf("Inventory no longer contains %s\n", itemName);
-
-
+        return 0;
     }
 
     /**

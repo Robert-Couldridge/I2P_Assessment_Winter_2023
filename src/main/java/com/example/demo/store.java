@@ -44,7 +44,7 @@ public class store
 				if (userInput == 1)	{
 
 					// add an item
-					storeInstance.addItem(itemsFile);
+					// storeInstance.addItem(itemsFile);
 					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}
 				else if (userInput == 2) {
@@ -56,7 +56,7 @@ public class store
 				else if (userInput == 3) {
 
 					// remove an item
-					storeInstance.removeItem(itemsFile);
+					//storeInstance.removeItem(itemsFile);
 					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}
 				else if (userInput == 4) {
