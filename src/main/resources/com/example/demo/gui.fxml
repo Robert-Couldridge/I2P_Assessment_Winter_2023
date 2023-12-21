@@ -36,13 +36,13 @@
    </StackPane>
         <HBox prefHeight="27.0" prefWidth="383.0">
             <children>
-                <ToggleButton fx:id="addItem" onAction="#addAnItem" snapToPixel="false" style="-fx-background-color: #666769; -fx-border-color: #bfbfbf;" text="Add Item" textAlignment="CENTER">
+                <Button fx:id="addItem" onAction="#addAnItem" snapToPixel="false" style="-fx-background-color: #666769; -fx-border-color: #bfbfbf;" text="Add Item" textAlignment="CENTER">
             <HBox.margin>
                <Insets />
             </HBox.margin>
             <font>
                <Font size="16.0" />
-            </font></ToggleButton>
+            </font></Button>
                 <Button fx:id="updateQuantity" onAction="#updateQuantity" style="-fx-background-color: #666769; -fx-border-color: #bfbfbf;" text="Update Quantity of an Item" textAlignment="CENTER">
             <font>
                <Font size="16.0" />

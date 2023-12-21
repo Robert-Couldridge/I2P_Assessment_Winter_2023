@@ -14,3 +14,4 @@ id,description,unitPrice,qtyInStock,totalPrice
 00016,timing chain,60.00,33,1980.00
 00017,valve cover gasket,70.00,6,420.00
 00018,water pump,160.00,16,2560.0
+00019,crankshaft,300.00,6,1800.00

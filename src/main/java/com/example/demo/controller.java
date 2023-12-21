@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class controller {
-    public ToggleButton addItem;
+    public Button addItem;
     public Button updateQuantity;
     public Button removeItem;
     public Button searchItem;
@@ -33,12 +33,20 @@ public class controller {
 
     int quantity;
 
-    protected void closeTextFields(){
+    protected void clearGui(){
         itemName.setVisible(false);
         itemUnitPrice.setVisible(false);
         itemQuantity.setVisible(false);
         submit.setVisible(false);
         outputText.setText("");
+        addItem.setStyle("-fx-border-color: #bfbfbf; -fx-background-color: #666769;");
+        updateQuantity.setStyle("-fx-border-color: #bfbfbf; -fx-background-color: #666769;");
+        removeItem.setStyle("-fx-border-color: #bfbfbf; -fx-background-color: #666769;");
+        searchItem.setStyle("-fx-border-color: #bfbfbf; -fx-background-color: #666769;");
+        displayTransaction.setStyle("-fx-border-color: #bfbfbf; -fx-background-color: #666769;");
+        itemName.clear();
+        itemQuantity.clear();
+        itemUnitPrice.clear();
     }
 
     @FXML
@@ -47,53 +55,59 @@ public class controller {
     // option 1 add an item
     @FXML
     protected void addAnItem(ActionEvent event) {
-        closeTextFields();
+        clearGui();
         itemName.setVisible(true);
         itemQuantity.setVisible(true);
         itemUnitPrice.setVisible(true);
         submit.setVisible(true);
+        addItem.setStyle("-fx-border-color: #b79224;");
         submitAction = "addItem";
     }
 
     // option 2 update quantity of an item
     @FXML
     protected void updateQuantity(){
-        closeTextFields();
+        clearGui();
         itemName.setVisible(true);
         itemQuantity.setVisible(true);
         submit.setVisible(true);
+        updateQuantity.setStyle("-fx-border-color: #b79224;");
         submitAction = "updateQuantity";
     }
 
     // option 3 remove an item
     @FXML
     protected void removeAnItem(){
-        closeTextFields();
+        clearGui();
         itemName.setVisible(true);
         submit.setVisible(true);
+        removeItem.setStyle("-fx-border-color: #b79224;");
         submitAction = "removeItem";
     }
 
     // option 4 search for an item
     @FXML
     protected void searchForItem(){
-        closeTextFields();
+        clearGui();
         itemName.setVisible(true);
         submit.setVisible(true);
+        searchItem.setStyle("-fx-border-color: #b79224;");
         submitAction = "searchItem";
     }
 
     // option 5 display transaction report
     @FXML
     protected void displayTransactionReport(){
-        closeTextFields();
+        clearGui();
+        displayTransaction.setStyle("-fx-border-color: #b79224;");
         storeInstance.displayTransactionReport();
     }
 
     // option 6 exit
     @FXML
     protected void exit(){
-        closeTextFields();
+        clearGui();
+        exit.setStyle("-fx-border-color: #b79224;");
         storeInstance.clearTransactionReport();
         Platform.exit();
     }
