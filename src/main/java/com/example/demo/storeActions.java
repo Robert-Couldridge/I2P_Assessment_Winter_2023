@@ -33,7 +33,7 @@ public class storeActions {
     protected int addItem(String itemsFile, String itemName, int quantity, float unitPrice){
 
         // check whether the desired item exists in the items file
-        if (isItemInInventory(itemName, itemsFile, true)){
+        if (isItemInInventory(itemName, itemsFile, false)){
             return 1;
             }
 
@@ -111,9 +111,9 @@ public class storeActions {
     protected int updateQuantity(String itemsFile, String itemName, int quantity){
 
         // check whether the desired item exists in the itemsFile
-        if (!isItemInInventory(itemName, itemsFile,false)){
-            return 1;
-        }
+        if (!isItemInInventory(itemName, itemsFile,false)){return 1;}
+
+        if (quantity <= 0){return 2;}
 
         String[] item = {"Null", "Null", "Null", "Null", "Null"};
 
@@ -173,8 +173,6 @@ public class storeActions {
         }
         else {qtySold=0;}
         addToTransactionReport(item[0], item[1], qtySold, Float.parseFloat(item[2]), quantity, "Item Quantity Updated");
-
-        System.out.printf("Inventory now contains %d %s's\n", quantity, itemName);
         return 0;
     }
 
@@ -256,6 +254,7 @@ public class storeActions {
 	 */
     protected boolean isItemInInventory(String itemName, String itemsFile, boolean displayFindings){
         boolean inFile = false;
+        String[] itemDetails;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(itemsFile))){
             String line;
 
@@ -267,6 +266,7 @@ public class storeActions {
                         System.out.printf("ITEM ID: %s%nITEM DESCRIPTION: %s%nUNIT PRICE: %s%nQUANTITY: %s%nTOTAL PRICE: %s%n",
                                 currentItemName[0],currentItemName[1],currentItemName[2],currentItemName[3],currentItemName[4]);
                     }
+                    itemDetails = currentItemName;
                     inFile = true;
                 }
             }

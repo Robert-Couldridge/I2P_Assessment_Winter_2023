@@ -10,6 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.ToggleButton?>
 <VBox alignment="CENTER" prefHeight="622.0" prefWidth="836.0" spacing="20.0" style="-fx-background-color: #037A68;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller">
         <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" />
@@ -30,18 +31,18 @@
          <Insets />
       </opaqueInsets>
       <VBox.margin>
-         <Insets top="-260.0" />
+         <Insets top="-170.0" />
       </VBox.margin>
    </StackPane>
         <HBox prefHeight="27.0" prefWidth="383.0">
             <children>
-                <Button fx:id="addItem" onAction="#addAnItem" snapToPixel="false" style="-fx-background-color: #666769; -fx-border-color: #bfbfbf;" text="Add Item" textAlignment="CENTER">
+                <ToggleButton fx:id="addItem" onAction="#addAnItem" snapToPixel="false" style="-fx-background-color: #666769; -fx-border-color: #bfbfbf;" text="Add Item" textAlignment="CENTER">
             <HBox.margin>
                <Insets />
             </HBox.margin>
             <font>
                <Font size="16.0" />
-            </font></Button>
+            </font></ToggleButton>
                 <Button fx:id="updateQuantity" onAction="#updateQuantity" style="-fx-background-color: #666769; -fx-border-color: #bfbfbf;" text="Update Quantity of an Item" textAlignment="CENTER">
             <font>
                <Font size="16.0" />
@@ -121,4 +122,8 @@
          </VBox>
       </children>
    </HBox>
+   <Text fx:id="outputText" fill="#b79224" strokeType="OUTSIDE" strokeWidth="0.0">
+      <font>
+         <Font size="14.0" />
+      </font></Text>
     </VBox>
