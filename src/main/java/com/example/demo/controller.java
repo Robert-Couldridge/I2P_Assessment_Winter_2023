@@ -120,19 +120,19 @@ public class controller {
             case "addItem":
                 quantity = takeUserInput.integerConversion(itemQuantity.getText());
                 if (quantity <= 0){
-                    displayedText += "invalid value for quantity\n";
+                    displayedText += "invalid value for quantity ";
                     outputText.setText(displayedText);
                     actionComplete = false;
                 }
                 float unitPrice = takeUserInput.floatConversion(itemUnitPrice.getText());
                 if (unitPrice <= 0){
-                    displayedText += "invalid value for unit price\n";
+                    displayedText += "invalid value for unit price ";
                     outputText.setText(displayedText);
                     actionComplete = false;
                 }
                 if (!actionComplete){break;}
                 if (storeInstance.addItem(itemsFile, itemName.getText(), quantity, unitPrice) == 1){
-                    outputText.setText("item already in inventory\n");
+                    outputText.setText("item already in inventory");
                     actionComplete = false;
                 }
                 if (actionComplete) {
@@ -142,13 +142,13 @@ public class controller {
             case "updateQuantity":
                 quantity = takeUserInput.integerConversion(itemQuantity.getText());
                 if (quantity <= 0){
-                    displayedText += "invalid value for quantity\n";
+                    displayedText += "invalid value for quantity ";
                     outputText.setText(displayedText);
                     actionComplete = false;
                 }
                 if (storeInstance.updateQuantity(itemsFile, itemName.getText(), quantity) != 0){
                     if (storeInstance.updateQuantity(itemsFile, itemName.getText(), quantity) == 1){
-                    displayedText += "item not in inventory\n";}
+                    displayedText += "item not in inventory ";}
                     outputText.setText(displayedText);
                     actionComplete = false;
                 }
