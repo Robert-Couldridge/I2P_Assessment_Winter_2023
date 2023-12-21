@@ -57,9 +57,6 @@ public class storeActions {
 
         // update the transaction report
         addToTransactionReport(itemId,itemName,0,unitPrice,quantity,"Item Added To Inventory");
-
-        // display item added to user
-        System.out.printf("%d %s's added at £%.2f each\n", quantity, itemName, unitPrice);
         return 0;
 
     }
@@ -236,8 +233,6 @@ public class storeActions {
 
         // update the transaction report
         addToTransactionReport(item[0], item[1], 0, Float.parseFloat(item[2]), 0, "Item Removed From Inventory");
-
-        System.out.printf("Inventory no longer contains %s\n", itemName);
         return 0;
     }
 

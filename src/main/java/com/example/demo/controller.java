@@ -118,6 +118,12 @@ public class controller {
         String displayedText = "";
         switch (submitAction){
             case "addItem":
+                if (Objects.equals(itemQuantity.getText(), "") ||
+                        Objects.equals(itemName.getText(), "") ||
+                                Objects.equals(itemUnitPrice.getText(), "")){
+                    outputText.setText("enter a value for all fields");
+                    actionComplete = false;
+                    break;}
                 quantity = takeUserInput.integerConversion(itemQuantity.getText());
                 if (quantity <= 0){
                     displayedText += "invalid value for quantity ";
@@ -131,42 +137,55 @@ public class controller {
                     actionComplete = false;
                 }
                 if (!actionComplete){break;}
-                if (storeInstance.addItem(itemsFile, itemName.getText(), quantity, unitPrice) == 1){
+                if (storeInstance.addItem(itemsFile, itemName.getText().toLowerCase(), quantity, unitPrice) == 1){
                     outputText.setText("item already in inventory");
                     actionComplete = false;
                 }
                 if (actionComplete) {
-                    outputText.setText(quantity + " " + itemName.getText() + "'s added to inventory at £" + unitPrice + " each");
+                    outputText.setText(quantity + " " + itemName.getText().toLowerCase() + "'s added to inventory at £" + unitPrice + " each");
                 }
                 break;
             case "updateQuantity":
+                if (Objects.equals(itemQuantity.getText(), "") ||
+                        Objects.equals(itemName.getText(), "")){
+                    outputText.setText("enter a value for all fields");
+                    actionComplete = false;
+                    break;}
                 quantity = takeUserInput.integerConversion(itemQuantity.getText());
                 if (quantity <= 0){
                     displayedText += "invalid value for quantity ";
                     outputText.setText(displayedText);
                     actionComplete = false;
                 }
-                if (storeInstance.updateQuantity(itemsFile, itemName.getText(), quantity) != 0){
-                    if (storeInstance.updateQuantity(itemsFile, itemName.getText(), quantity) == 1){
+                if (storeInstance.updateQuantity(itemsFile, itemName.getText().toLowerCase(), quantity) != 0){
+                    if (storeInstance.updateQuantity(itemsFile, itemName.getText().toLowerCase(), quantity) == 1){
                     displayedText += "item not in inventory ";}
                     outputText.setText(displayedText);
                     actionComplete = false;
                 }
                 if (actionComplete)
-                    outputText.setText("inventory now contains " + quantity + " " + itemName.getText() + "'s");
+                    outputText.setText("inventory now contains " + quantity + " " + itemName.getText().toLowerCase() + "'s");
                 break;
             case "removeItem":
-                if (storeInstance.removeItem(itemsFile, itemName.getText()) == 1) {
-                    outputText.setText(itemName.getText() + " not found in inventory");
+                if (Objects.equals(itemName.getText(), "")){
+                    outputText.setText("enter a value for all fields");
+                    actionComplete = false;
+                    break;}
+                if (storeInstance.removeItem(itemsFile, itemName.getText().toLowerCase()) == 1) {
+                    outputText.setText(itemName.getText().toLowerCase() + " not found in inventory");
                     actionComplete = false;
                 }
-                else {outputText.setText("Inventory no longer contains " + itemName.getText());}
+                else {outputText.setText("Inventory no longer contains " + itemName.getText().toLowerCase());}
                 break;
             case "searchItem":
-                if (storeInstance.isItemInInventory(itemName.getText(), itemsFile, true)) {
-                    outputText.setText(itemName.getText() + " is in inventory");
+                if (Objects.equals(itemName.getText(), "")){
+                    outputText.setText("enter a value for all fields");
+                    actionComplete = false;
+                    break;}
+                if (storeInstance.isItemInInventory(itemName.getText().toLowerCase(), itemsFile, false)) {
+                    outputText.setText(itemName.getText().toLowerCase() + " is in inventory");
                 } else {
-                    outputText.setText(itemName.getText() + " is not in inventory");
+                    outputText.setText(itemName.getText().toLowerCase() + " is not in inventory");
                     actionComplete = false;
                 }
                 break;
