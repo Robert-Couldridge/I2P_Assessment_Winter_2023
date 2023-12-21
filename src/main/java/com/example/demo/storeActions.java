@@ -108,18 +108,12 @@ public class storeActions {
      *
      * @param itemsFile This the name of the file that stores all the inventory records i.e "items.txt"
 	 */
-    protected void updateQuantity(String itemsFile){
+    protected int updateQuantity(String itemsFile, String itemName, int quantity){
 
         // check whether the desired item exists in the itemsFile
-        String itemName = "";
-        int quantity = 0;
-        do {
-            itemName = takeUserInput.takeUserInputString("NAME OF ITEM: ");
-            if (!isItemInInventory(itemName, itemsFile,false)){
-                System.out.printf("%s not found in inventory\n", itemName);
-            }
-        } while (!isItemInInventory(itemName, itemsFile,true));
-        System.out.printf("%s located in inventory\n", itemName);
+        if (!isItemInInventory(itemName, itemsFile,false)){
+            return 1;
+        }
 
         String[] item = {"Null", "Null", "Null", "Null", "Null"};
 
@@ -146,7 +140,6 @@ public class storeActions {
                         item = Arrays.copyOf(currentItem, 4);
 
                         // asks the user for the desired new quantity of the item
-                        // quantity = takeUserInput.takeUserInputInteger("UPDATED QUANTITY OF ITEM: ");
                         float unitPrice = Float.parseFloat(currentItem[2]);
                         float totalPrice = unitPrice * quantity;
 
@@ -182,6 +175,7 @@ public class storeActions {
         addToTransactionReport(item[0], item[1], qtySold, Float.parseFloat(item[2]), quantity, "Item Quantity Updated");
 
         System.out.printf("Inventory now contains %d %s's\n", quantity, itemName);
+        return 0;
     }
 
     /**

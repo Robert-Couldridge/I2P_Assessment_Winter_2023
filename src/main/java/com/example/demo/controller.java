@@ -28,12 +28,22 @@ public class controller {
 
     String submitAction = "";
 
+    int quantity;
+
+    protected void closeTextFields(){
+        itemName.setVisible(false);
+        itemUnitPrice.setVisible(false);
+        itemQuantity.setVisible(false);
+        submit.setVisible(false);
+    }
+
     @FXML
     private Label welcomeText;
 
     // option 1 add an item
     @FXML
     protected void addAnItem(ActionEvent event) {
+        closeTextFields();
         itemName.setVisible(true);
         itemQuantity.setVisible(true);
         itemUnitPrice.setVisible(true);
@@ -44,6 +54,7 @@ public class controller {
     // option 2 update quantity of an item
     @FXML
     protected void updateQuantity(){
+        closeTextFields();
         itemName.setVisible(true);
         itemQuantity.setVisible(true);
         submit.setVisible(true);
@@ -53,6 +64,7 @@ public class controller {
     // option 3 remove an item
     @FXML
     protected void removeAnItem(){
+        closeTextFields();
         itemName.setVisible(true);
         submit.setVisible(true);
         submitAction = "removeItem";
@@ -61,6 +73,7 @@ public class controller {
     // option 4 search for an item
     @FXML
     protected void searchForItem(){
+        closeTextFields();
         itemName.setVisible(true);
         submit.setVisible(true);
         submitAction = "searchItem";
@@ -69,12 +82,14 @@ public class controller {
     // option 5 display transaction report
     @FXML
     protected void displayTransactionReport(){
+        closeTextFields();
         storeInstance.displayTransactionReport();
     }
 
     // option 6 exit
     @FXML
     protected void exit(){
+        closeTextFields();
         storeInstance.clearTransactionReport();
         Platform.exit();
     }
@@ -83,7 +98,7 @@ public class controller {
     protected void submit(){
         switch (submitAction){
             case "addItem":
-                int quantity = takeUserInput.integerConversion(itemQuantity.getText());
+                quantity = takeUserInput.integerConversion(itemQuantity.getText());
                 if (quantity <= -1){
                     System.out.println("invalid value for quantity");
                     break;
@@ -98,7 +113,12 @@ public class controller {
                 }
                 break;
             case "updateQuantity":
-                storeInstance.updateQuantity(itemsFile);
+                quantity = takeUserInput.integerConversion(itemQuantity.getText());
+                if (quantity <= -1){
+                    System.out.println("invalid value for quantity");
+                    break;
+                }
+                storeInstance.updateQuantity(itemsFile, itemName.getText(), quantity);
                 break;
             case "removeItem":
                 if (storeInstance.removeItem(itemsFile, itemName.getText()) == 1) {
@@ -116,11 +136,14 @@ public class controller {
                 System.out.println("invalid input");
         }
         itemName.setVisible(false);
+        itemName.clear();
         if (Arrays.asList(new String[]{"addItem", "updateQuantity"}).contains(submitAction)){
             itemQuantity.setVisible(false);
+            itemQuantity.clear();
         }
         if (Objects.equals(submitAction, "addItem")){
             itemUnitPrice.setVisible(false);
+            itemUnitPrice.clear();
         }
         submit.setVisible(false);
     }

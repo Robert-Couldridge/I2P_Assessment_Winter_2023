@@ -50,7 +50,7 @@ public class store
 				else if (userInput == 2) {
 
 					// update the quantity of an item
-					storeInstance.updateQuantity(itemsFile);
+					//storeInstance.updateQuantity(itemsFile);
 					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}
 				else if (userInput == 3) {
