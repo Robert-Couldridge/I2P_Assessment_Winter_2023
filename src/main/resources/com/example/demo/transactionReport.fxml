@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" prefHeight="622.0" prefWidth="836.0" spacing="20.0" style="-fx-background-color: #037A68;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller">
+<VBox alignment="CENTER" prefHeight="622.0" prefWidth="836.0" spacing="20.0" style="-fx-background-color: #037A68;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.transactionReportController">
         <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" />
         </padding>
@@ -32,14 +32,14 @@
          <Insets top="20.0" />
       </VBox.margin>
    </StackPane>
-   <TableView prefHeight="501.0" prefWidth="796.0">
-     <columns>
-       <TableColumn fx:id="itemID" prefWidth="110.40005111694336" text="Item ID" />
-       <TableColumn fx:id="itemDescription" prefWidth="120.7999267578125" text="Item Description" />
-         <TableColumn fx:id="qtySold" prefWidth="120.80000305175781" text="Quantity Sold" />
-         <TableColumn fx:id="amount" prefWidth="121.60003662109375" text="Amount" />
-         <TableColumn fx:id="stockRemaining" prefWidth="151.20001220703125" text="Stock Remaining" />
-         <TableColumn fx:id="transactionType" prefWidth="172.800048828125" text="Transaction Type" />
-     </columns>
-   </TableView>
-    </VBox>
+    <TableView fx:id="transactionTable" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+            <TableColumn fx:id="itemId" prefWidth="103.19997787475586" text="Item Id" />
+            <TableColumn fx:id="itemDescription" prefWidth="112.0" text="Item Description" />
+         <TableColumn fx:id="quantitySold" prefWidth="112.00001525878906" text="Quantity Sold" />
+         <TableColumn fx:id="amount" prefWidth="124.79998779296875" text="Amount" />
+         <TableColumn fx:id="stockRemaining" prefWidth="122.39996337890625" text="Stock Remaining" />
+         <TableColumn fx:id="transactionType" prefWidth="223.2000732421875" text="Transaction Type" />
+        </columns>
+    </TableView>
+</VBox>
