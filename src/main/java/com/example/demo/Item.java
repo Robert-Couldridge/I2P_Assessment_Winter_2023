@@ -2,18 +2,18 @@ package com.example.demo;
 
 public class Item {
 
-    private String itemId;
-    private String itemDescription;
+    private final String itemId;
+    private final String itemDescription;
 
-    private int qtySold;
+    private final String qtySold;
 
-    private int amount;
+    private final String amount;
 
-    private int stockRemaining;
+    private final String stockRemaining;
 
-    private String transactionType;
+    private final String transactionType;
 
-    public Item(String itemId, String itemDescription, int qtySold, int amount, int stockRemaining, String transactionType) {
+    public Item(String itemId, String itemDescription, String qtySold, String amount, String stockRemaining, String transactionType) {
         this.itemId = itemId;
         this.itemDescription = itemDescription;
         this.qtySold = qtySold;
@@ -30,15 +30,15 @@ public class Item {
         return itemDescription;
     }
 
-    public int getQtySold() {
+    public String getQtySold() {
         return qtySold;
     }
 
-    public int getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public int getStockRemaining() {
+    public String getStockRemaining() {
         return stockRemaining;
     }
 

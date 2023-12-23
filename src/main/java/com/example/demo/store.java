@@ -78,7 +78,7 @@ public class store
 				else if (userInput == 5){
 
 					// display the transaction report
-					storeInstance.displayTransactionReport();
+					//storeInstance.displayTransactionReport();
 					System.out.print("\n Report printed\n");
 					String continueScript = takeUserInput.takeUserInputString("Press ENTER to continue\n\n");
 				}

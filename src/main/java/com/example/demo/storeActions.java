@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.util.Scanner;
 
 /**
  * A selection of methods that represent the majority of actions the inventory
@@ -304,17 +305,30 @@ public class storeActions {
     /**
      * This method prints the transaction report out line by line in the console
      */
-    protected void displayTransactionReport(){
+    protected String[][] returnTransactionReport(){
+        try {
+            File file = new File("src/main/java/com/example/demo/transactions.txt");
+            Scanner scanner = new Scanner(file);
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("src/main/java/com/example/demo/transactions.txt"))) {
-            String line;
+            int rows = (int) file.length();
+            String[][] report = new String[rows-1][6];
 
-            // print out the transaction report line by line
-            while ((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
+            scanner = new Scanner(file);
+
+            scanner.nextLine();
+
+            int row = 0;
+            while (scanner.hasNextLine()){
+                if (row != 0){
+                String[] lineValues = scanner.nextLine().split(",");
+                System.arraycopy(lineValues, 0, report[row], 0, lineValues.length);}
+                row++;
             }
+
+            return report;
         } catch (IOException e){
             System.out.println("Error: " + e.getMessage());
+            return null;
         }
     }
 
