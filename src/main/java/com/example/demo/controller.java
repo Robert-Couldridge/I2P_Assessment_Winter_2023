@@ -3,12 +3,16 @@ package com.example.demo;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -24,11 +28,17 @@ public class controller {
     public Button submit;
     public TextField itemUnitPrice;
     public Text outputText;
+    public TableColumn itemID;
+    public TableColumn itemDescription;
+    public TableColumn qtySold;
+    public TableColumn amount;
+    public TableColumn stockRemaining;
+    public TableColumn transactionType;
 
     storeActions storeInstance = new storeActions();
     userInput takeUserInput = new userInput();
     String itemsFile = "src/main/java/com/example/demo/items.txt";
-
+    Stage transactionReport = new Stage();
     String submitAction = "";
 
     int quantity;
@@ -101,6 +111,17 @@ public class controller {
         clearGui();
         displayTransaction.setStyle("-fx-border-color: #b79224;");
         storeInstance.displayTransactionReport();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(application.class.getResource("transactionReport.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 836, 622);
+            transactionReport.setResizable(false);
+            transactionReport.setTitle("Transaction Report");
+            transactionReport.setScene(scene);
+            transactionReport.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // option 6 exit
