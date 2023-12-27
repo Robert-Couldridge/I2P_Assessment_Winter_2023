@@ -30,7 +30,7 @@ public class transactionReportController implements Initializable {
     storeActions storeInstance = new storeActions();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // table tests
+        // setting columns to value in "item.java"
         itemId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
         itemDescription.setCellValueFactory(new PropertyValueFactory<>("itemDescription"));
         quantitySold.setCellValueFactory(new PropertyValueFactory<>("qtySold"));
