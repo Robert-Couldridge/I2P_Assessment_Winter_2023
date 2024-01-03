@@ -10,6 +10,7 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 
 /**
+ * Main File
  * The file that opens up and initialises the inventory management system program and window
  * @author Robert Couldridge
  * @version 2.0

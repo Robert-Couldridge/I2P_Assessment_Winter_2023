@@ -12,22 +12,22 @@ import java.util.Scanner;
 public class userInput {
 
     protected Integer integerConversion(String value) {
+        int integerInput;
             try {
-                int integerInput = Integer.parseInt(value);
-            } catch (InputMismatchException e) {
-                System.out.print("INVALID INPUT\nPlease enter an Integer\n");
-                return -1;
+                integerInput = Integer.parseInt(value);
+            } catch (InputMismatchException | NumberFormatException e) {
+                integerInput = -1;
             }
-        return Integer.parseInt(value);
+        return integerInput;
     }
 
     protected Float floatConversion(String value) {
+        float floatInput;
         try {
-            float floatInput = Float.parseFloat(value);
-        } catch (InputMismatchException e) {
-            System.out.print("INVALID INPUT\nPlease enter an Integer\n");
-            return -1f;
+            floatInput = Float.parseFloat(value);
+        } catch (InputMismatchException | NumberFormatException e) {
+            floatInput = -1f;
         }
-        return Float.parseFloat(value);
+        return floatInput;
     }
 }

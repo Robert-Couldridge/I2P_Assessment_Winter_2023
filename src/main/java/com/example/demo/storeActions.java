@@ -22,11 +22,17 @@ public class storeActions {
 
 
     /**
-     * This method asks the user to supply an item name, unit price and quantity
+     * This method takes an item name, unit price and quantity
+     * it checks if the item is already in 'items.txt'
      * it then auto generates an item id and calculates the total price of the stock
      * this information is all concatenated into a string that is appended to the items file.
      *
      * @param itemsFile This the name of the file that stores all the inventory records i.e "items.txt"
+     * @param itemName This is the name of the item being added
+     * @param quantity This is the quantity of the item being added
+     * @param unitPrice This is the unitPrice of the item being added
+     *
+     * @return int- This indicates the success of the action (0 - success, 1 - item already in 'items.txt' )
 	 */
     protected int addItem(String itemsFile, String itemName, int quantity, float unitPrice){
 
@@ -98,10 +104,13 @@ public class storeActions {
     }
 
     /**
-     * This method asks the user for an item, checks the item is in the items file
-     * then asks the user for an updated quantity, this is then written to the items file.
+     * This method takes the item name and the desired new quantity
+     * it then checks the item is in 'items.txt' and if so
+     * this information is then written to the items file.
      *
      * @param itemsFile This the name of the file that stores all the inventory records i.e "items.txt"
+     *
+     * @return int- This indicates the success of the action (0 - success, 1 - item not in inventory, 2 - quantity invalid)
 	 */
     protected int updateQuantity(String itemsFile, String itemName, int quantity){
 
@@ -172,10 +181,13 @@ public class storeActions {
     }
 
     /**
-     * This method asks the user for an item, checks the item is in the items file
+     * This method takes the item name
+     * it then checks the item is in 'items.txt' and if so
      * then removes the item from the itemsFile.
      *
      * @param itemsFile This the name of the file that stores all the inventory records i.e "items.txt"
+     *
+     * @return int- This indicates the success of the action (0 - success, 1 - item not in inventory)
      */
     protected int removeItem(String itemsFile, String itemName){
 
@@ -300,7 +312,9 @@ public class storeActions {
     }
 
     /**
-     * This method prints the transaction report out line by line in the console
+     * This method returns the transaction report as a 2d array of strings
+     *
+     * @return String[][] - this contains the information from 'transactions.txt'
      */
     protected String[][] returnTransactionReport(){
         try {
