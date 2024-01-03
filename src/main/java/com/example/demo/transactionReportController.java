@@ -11,9 +11,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * The file that handles all interactions with the secondary FXML file 'transactionReport.fxml'
+ * @author Robert Couldridge
+ * @version 2.0
+ * @since 2.0
+ */
 
 public class transactionReportController implements Initializable {
 
+    // initialising all elements on 'transactionReport.fxml'
     public TableColumn<Item, String> quantitySold;
     public TableColumn<Item, String> amount;
     public TableColumn<Item, String> stockRemaining;
@@ -27,7 +34,13 @@ public class transactionReportController implements Initializable {
     @FXML
     private TableView<Item> transactionTable;
 
+    // initialising an instance of the 'storeActions' class
     storeActions storeInstance = new storeActions();
+
+    /**
+     * This method transposes the information from the 'transactions.txt' file
+     * into the table view present on 'transactionReport.fxml
+     * */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // setting columns to value in "item.java"

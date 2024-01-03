@@ -13,16 +13,13 @@ import java.util.Scanner;
 
 /**
  * A selection of methods that represent the majority of actions the inventory
- * management system (store.java) uses
+ * management system via 'controller.java' uses
  * @author Robert Couldridge
- * @version 1.0
+ * @version 2.0
  * @since 1.0
  */
 public class storeActions {
 
-
-    // create an instance of the userInput class for the following methods to utilise.
-    userInput takeUserInput = new userInput();
 
     /**
      * This method asks the user to supply an item name, unit price and quantity

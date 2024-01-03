@@ -1,7 +1,15 @@
 package com.example.demo;
 
+/**
+ * An object used to allow the tableview on 'transactions.fxml' to ingest
+ * information from 'transactions.txt'
+ * @author Robert Couldridge
+ * @version 2.0
+ * @since 2.0
+ */
 public class Item {
 
+    // initialising variables
     private final String itemId;
     private final String itemDescription;
 
@@ -13,6 +21,8 @@ public class Item {
 
     private final String transactionType;
 
+    // initializers
+
     public Item(String itemId, String itemDescription, String qtySold, String amount, String stockRemaining, String transactionType) {
         this.itemId = itemId;
         this.itemDescription = itemDescription;
@@ -22,6 +32,7 @@ public class Item {
         this.transactionType = transactionType;
     }
 
+    // getters
     public String getItemId() {
         return itemId;
     }
